@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Free Unlimited Offline File-sharing Forever!">
+    <meta name="author" content="Will Cipriano">
+
+    <title>podje.li</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/css/fileinput.min.css" media="all"
+          rel="stylesheet" type="text/css"/>
+    <link href="style.css" media="all"
+          rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+<noscript>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>JavaScript is required!</h1>
+            <p>podje.li can't work its storage magic without Javascript enabled, sorry.</p>
+        </div>
+    </div>
+</noscript>
+
+<div class="container">
+    <div class="text-center">
+<img src="logo.png" class="center-block img-responsive" style="width: 100%; height: auto;" alt="PODJE.LI">
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="row" id="fileUpload">
+
+        <div class="col-sm-8 mx-auto">
+
+            <form onsubmit="loadFile(); return false;" style="display: none" id="fileSelectorPane">
+
+
+
+            <input id="fileSelector" name="input-b2" type="file" class="file form-control" data-show-preview="false">
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="container">
+
+
+    <div class="row" id="fileStatPanel" style="display: none">
+        <div class="col-xl-9 mx-auto">
+
+            <div class="col-xl-9 mx-auto">
+
+                <ul id="fileStats" class="list-group">
+                    <li id="fileStatSize" class="list-group-item lead"></li>
+                    <li id="fileStatType" class="list-group-item lead"></li>
+                    <li id="fileStatLastModified" class="list-group-item lead"></li>
+                </ul>
+                <br>
+
+        </div>
+
+
+            <div class="col-xl-9 mx-auto">
+
+                <div class="col-xl-9 mx-auto">
+    </div>
+</div>
+        </div>
+    </div>
+
+    <div class="row" id="fileUrlPanelSingle">
+        <div class="col-xl-9 mx-auto">
+
+            <div class="col-xl-9 mx-auto">
+                <br>
+            </div>
+
+            <div class="col-xl-9 mx-auto">
+
+
+            </div>
+
+                <div class="col-xl-9 mx-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="modal fade" id="singleFileUrlModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="singleFileUrlModalLabel">Share your file with this url</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="input-group" id="singleFileInput">
+                    <input type="text" class="form-control" id="singleFileUrl">
+                    <span class="input-group-btn">
+                            <button class="btn btn-sq btn-success" type="button" id="copyButton"
+                                    data-toggle="tooltip" data-placement="button"
+                                    title="Copy to Clipboard">Copy</button>
+                    </span>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="multiFileUrlModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="multiFileUrlModalLabel">Share your file with these urls</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="input-group" id="multiFileInput1">
+                    <input type="text" class="form-control" id="multiFileUrl1" autocomplete="off" autocapitalize="off" spellcheck="false">
+                    <span class="input-group-btn">
+                            <button class="btn btn-sq btn-success copy-btn" type="button" id="copyButton1"
+                                    data-toggle="tooltip" data-placement="button"
+                                    title="Copy to Clipboard" onclick="copyFromMultiSelect(1)"><img class="copy_icon" src="copy.png" alt="Copy icon"></button>
+                    </span>
+                </div>
+
+                <div class="input-group" id="multiFileInput2">
+                    <input type="text" class="form-control" id="multiFileUrl2" autocomplete="off" autocapitalize="off" spellcheck="false">
+                    <span class="input-group-btn">
+                            <button class="btn btn-sq btn-success copy-btn" type="button" id="copyButton2"
+                                    data-toggle="tooltip" data-placement="button"
+                                    title="Copy to Clipboard" onclick="copyFromMultiSelect(2)"><img class="copy_icon" src="copy.png" alt="Copy icon"></button>
+                    </span>
+                </div>
+
+                <div class="input-group" id="multiFileInput3">
+                    <input type="text" class="form-control" id="multiFileUrl3" autocomplete="off" autocapitalize="off" spellcheck="false">
+                    <span class="input-group-btn">
+                            <button class="btn btn-sq btn-success copy-btn" type="button" id="copyButton3"
+                                    data-toggle="tooltip" data-placement="button"
+                                    title="Copy to Clipboard" onclick="copyFromMultiSelect(3)"><img class="copy_icon" src="copy.png" alt="Copy icon"></button>
+                    </span>
+                </div>
+
+                <div class="input-group" id="multiFileInput4">
+                    <input type="text" class="form-control" id="multiFileUrl4" autocomplete="off" autocapitalize="off" spellcheck="false">
+                    <span class="input-group-btn">
+                            <button class="btn btn-sq btn-success copy-btn" type="button" id="copyButton4"
+                                    data-toggle="tooltip" data-placement="button"
+                                    title="Copy to Clipboard" onclick="copyFromMultiSelect(4)"><img class="copy_icon" src="copy.png" alt="Copy icon"></button>
+                    </span>
+                </div>
+
+                <div class="input-group" id="multiFileInput5">
+                    <input type="text" class="form-control" id="multiFileUrl5" autocomplete="off" autocapitalize="off" spellcheck="false">
+                    <span class="input-group-btn">
+                            <button class="btn btn-sq btn-success copy-btn" type="button" id="copyButton5"
+                                    data-toggle="tooltip" data-placement="button"
+                                    title="Copy to Clipboard" onclick="copyFromMultiSelect(5)"><img class="copy_icon" src="copy.png" alt="Copy icon"></button>
+                    </span>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="singleFileUrlDownloadModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="singleFileUrlDownloadModalLabel">Download your file</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <button type="button" class="btn btn-success" onclick="$loadSingleFileFromQueryParam()">Download File</button>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="filePartDiscoveryModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="f">File fragment detected.</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+
+
+                <img class="img-fluid fileGif" src="filedownload.gif" id="fileFragmentGif" alt="file loading">
+
+
+                <p id="filePartMessage"></p>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="fileFoundModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">File assembly complete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+
+
+                <img class="img-fluid fileGif" src="filedownload.gif" id="fileDoneGif" alt="file completed">
+
+
+                <p id="fileCompleteMessage"></p>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="assembleMultiPartFile()">Download</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+
+
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/base64-string.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+<script src="fileShare.js"></script>
+<script src="ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/js/fileinput.min.js"></script>
+
+</html>

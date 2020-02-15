@@ -1,0 +1,57 @@
+.file_display {
+    display: none;
+}
+
+.file_upload {
+    display: none;
+}
+
+.successful_upload {
+    display: none;
+}
+
+.form-control:focus,
+.form-contol:active {
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    -webkit-tap-highlight-color: transparent;
+    border: solid 1px #5cb85c;
+
+}
+
+.btn-sq {
+    width: 38px !important;
+    height: 38px !important;
+    padding:2px;
+    font-size: 10px;
+    border-radius: 0 !important;
+}
+
+.copy_icon {
+    width: 34px;
+    height: 34px;
+
+}
+
+.fileSelectorGroup {
+    width: 1000px;
+}
+
+.fileGif {
+    width: 150px;
+    height: 150px;
+}
+
+
+@media (min-width: 1200px) {
+
+    #fileSelectorContainer {
+        position: relative;
+        top: -60px;
+    }
+
+
+}
