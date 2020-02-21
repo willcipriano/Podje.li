@@ -31,7 +31,7 @@ function addMultiUrl(urls) {
     let x = 1;
 
     while (x <= urls.length && x <= 5) {
-        this['multiFileUrl' + x].val(urls[x - 1]);
+        $('#multiFileUrl' + x).val(urls[x - 1]);
         x += 1;
     }
 
