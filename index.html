@@ -149,7 +149,8 @@
                     <input autocapitalize="off" autocomplete="off" class="form-control" id="multiFileUrl1" spellcheck="false"
                            type="text">
                     <span class="input-group-btn">
-                            <button class="btn btn-sq btn-success copy-btn" data-placement="button" data-toggle="tooltip"
+                            <button class="btn btn-sq btn-success copy-btn multiFile" data-placement="button"
+                                    data-toggle="tooltip"
                                     id="copyButton1" onclick="copyFromMultiSelect(1)"
                                     title="Copy to Clipboard" type="button"><img alt="Copy icon"
                                                                                                     class="copy_icon"
@@ -158,10 +159,12 @@
                 </div>
 
                 <div class="input-group" id="multiFileInput2">
-                    <input autocapitalize="off" autocomplete="off" class="form-control" id="multiFileUrl2" spellcheck="false"
+                    <input autocapitalize="off" autocomplete="off" class="form-control" id="multiFileUrl2"
+                           spellcheck="false"
                            type="text">
                     <span class="input-group-btn">
-                            <button class="btn btn-sq btn-success copy-btn" data-placement="button" data-toggle="tooltip"
+                            <button class="btn btn-sq btn-success copy-btn multiFile" data-placement="button"
+                                    data-toggle="tooltip"
                                     id="copyButton2" onclick="copyFromMultiSelect(2)"
                                     title="Copy to Clipboard" type="button"><img alt="Copy icon"
                                                                                                     class="copy_icon"
@@ -170,10 +173,12 @@
                 </div>
 
                 <div class="input-group" id="multiFileInput3">
-                    <input autocapitalize="off" autocomplete="off" class="form-control" id="multiFileUrl3" spellcheck="false"
+                    <input autocapitalize="off" autocomplete="off" class="form-control multiFile" id="multiFileUrl3"
+                           spellcheck="false"
                            type="text">
                     <span class="input-group-btn">
-                            <button class="btn btn-sq btn-success copy-btn" data-placement="button" data-toggle="tooltip"
+                            <button class="btn btn-sq btn-success copy-btn multiFile" data-placement="button"
+                                    data-toggle="tooltip"
                                     id="copyButton3" onclick="copyFromMultiSelect(3)"
                                     title="Copy to Clipboard" type="button"><img alt="Copy icon"
                                                                                                     class="copy_icon"
@@ -182,10 +187,12 @@
                 </div>
 
                 <div class="input-group" id="multiFileInput4">
-                    <input autocapitalize="off" autocomplete="off" class="form-control" id="multiFileUrl4" spellcheck="false"
+                    <input autocapitalize="off" autocomplete="off" class="multiFile form-control" id="multiFileUrl4"
+                           spellcheck="false"
                            type="text">
                     <span class="input-group-btn">
-                            <button class="btn btn-sq btn-success copy-btn" data-placement="button" data-toggle="tooltip"
+                            <button class="multiFile btn btn-sq btn-success copy-btn" data-placement="button"
+                                    data-toggle="tooltip"
                                     id="copyButton4" onclick="copyFromMultiSelect(4)"
                                     title="Copy to Clipboard" type="button"><img alt="Copy icon"
                                                                                                     class="copy_icon"
@@ -194,10 +201,12 @@
                 </div>
 
                 <div class="input-group" id="multiFileInput5">
-                    <input autocapitalize="off" autocomplete="off" class="form-control" id="multiFileUrl5" spellcheck="false"
+                    <input autocapitalize="off" autocomplete="off" class="multiFile form-control" id="multiFileUrl5"
+                           spellcheck="false"
                            type="text">
                     <span class="input-group-btn">
-                            <button class="btn btn-sq btn-success copy-btn" data-placement="button" data-toggle="tooltip"
+                            <button class="multiFile btn btn-sq btn-success copy-btn" data-placement="button"
+                                    data-toggle="tooltip"
                                     id="copyButton5" onclick="copyFromMultiSelect(5)"
                                     title="Copy to Clipboard" type="button"><img alt="Copy icon"
                                                                                                     class="copy_icon"
@@ -208,7 +217,7 @@
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                <button class="btn btn-secondary" onclick="closeMultiModal()" type="button">Close</button>
                 <button class="btn btn-primary" type="button">Save changes</button>
             </div>
         </div>
@@ -298,17 +307,33 @@
 
 </div>
 
+<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+    <!-- Position it -->
+    <div style="position: absolute; top: 0; right: 0;">
+
+        <!-- Then put toasts within -->
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="icons/help-icon.png" class="rounded mr-2" alt="...">
+                <strong class="mr-auto">Clipboard Copy Successful</strong>
+            </div>
+            <div class="toast-body">
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 
 <script crossorigin="anonymous" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script scr="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/umd/util.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/base64-string.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
-<script src="fileShare.js"></script>
-<script src="ui.js"></script>
+<script src="js/fileShare.js"></script>
+<script src="js/ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/js/fileinput.min.js"></script>
 
 </html>

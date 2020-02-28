@@ -133,11 +133,6 @@ function appendZeros(partNo) {
 }
 
 
-function copyFromMultiSelect(number) {
-    $("multiFileUrl" + number).select();
-    document.execCommand("copy");
-}
-
 function assembleMultiPartFile() {
     let fileEncoded = "";
     const totalParts = localStorage.getItem("total_parts");

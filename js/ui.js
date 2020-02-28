@@ -1,3 +1,6 @@
+bootstrap.Toast.Default.delay = 5000;
+
+
 function populateFileDetails(file) {
 
     FILEMIME = file.type;
@@ -31,11 +34,36 @@ function addMultiUrl(urls) {
     let x = 1;
 
     while (x <= urls.length && x <= 5) {
-        $('#multiFileUrl' + x).val(urls[x - 1]);
+        element = $('#multiFileUrl' + x);
+        element.val(urls[x - 1]);
+        element.show();
+        $('#copyButton' + x).show();
         x += 1;
     }
 
     multiFileUrlModal.modal('show');
+}
+
+function closeMultiModal() {
+
+    const multiFileUrlModal = $("#multiFileUrlModal");
+
+    let x = 1;
+
+    while (x <= 5) {
+
+        element = $('#multiFileUrl' + x);
+        element.val('');
+        element.hide();
+        $('#copyButton' + x).hide();
+        x += 1;
+    }
+
+    multiFileUrlModal.modal('hide');
+
+
+
+
 }
 
 function flipPanel(panelName, direction = true) {
@@ -93,6 +121,18 @@ function handleMultiPartProcess() {
     }
 
 }
+
+function toast(toastBody){
+        $('.toast-body').text(toastBody);
+        $('.toast').toast('show');
+}
+
+function copyFromMultiSelect(number) {
+    $("multiFileUrl" + number).select();
+    document.execCommand("copy");
+    toast("URL #" + number + " copied to your clipboard successfully.");
+}
+
 
 
 $(document).ready(function () {
