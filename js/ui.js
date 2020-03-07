@@ -12,7 +12,7 @@ function populateFileDetails(file) {
 
     fileStatSize.text("Size: " + file.size + " bytes");
     fileStatType.text("Type: " + FILEMIME);
-    fileStatLastModified.text("Last Modified: " + lastModified.getMonth() + "/" + lastModified.getFullYear());
+    fileStatLastModified.text("Last Modified: " + (lastModified.getMonth() + 1) + "/" + lastModified.getFullYear());
     flipPanel("fileDetails");
 
 }
@@ -60,8 +60,6 @@ function closeMultiModal() {
     }
 
     multiFileUrlModal.modal('hide');
-
-
 
 
 }
@@ -122,17 +120,24 @@ function handleMultiPartProcess() {
 
 }
 
-function toast(toastBody){
-        $('.toast-body').text(toastBody);
-        $('.toast').toast('show');
+function toast(toastBody) {
+    $('.toast-body').text(toastBody);
+    $('.toast').toast('show');
 }
 
 function copyFromMultiSelect(number) {
-    $("multiFileUrl" + number).select();
-    document.execCommand("copy");
-    toast("URL #" + number + " copied to your clipboard successfully.");
-}
+    let multiFileUrl = $("#multiFileUrl" + number);
 
+        navigator.clipboard.writeText(multiFileUrl.val())
+            .then(() => {
+                toast("URL #" + number + " copied to your clipboard successfully.");
+            })
+            .catch(err => {
+                toast("URL #" + number + " copied to your clipboard unsuccessfully.");
+                console.log('clipboard copy error: ' + err);
+            });
+
+}
 
 
 $(document).ready(function () {
@@ -179,4 +184,3 @@ $(document).ready(function () {
     handleMultiPartProcess();
 
 });
-
