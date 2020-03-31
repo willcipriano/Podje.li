@@ -30,6 +30,7 @@ function addUrl(url) {
 function addMultiUrl(urls, page = 1) {
 
     const multiFileUrlModal = $("#multiFileUrlModal");
+    const multiFileUrlNext = $("#multiFileUrlNext");
 
     let start;
 
@@ -42,9 +43,6 @@ function addMultiUrl(urls, page = 1) {
 
     let cur = start;
     let elementNum = 1;
-
-    console.log(start);
-    console.log(elementNum);
 
     while (cur <= urls.length && cur <= start + 5) {
         console.log('here');
@@ -59,7 +57,14 @@ function addMultiUrl(urls, page = 1) {
             break;
         }
     }
+
     multiFileUrlModal.modal('show');
+
+    if (page <= urls.length / 5) {
+        multiFileUrlNext.click(function() { setMultiUrlPage(page + 1) })
+    }
+
+
 }
 
 function closeMultiModal() {
@@ -78,7 +83,6 @@ function closeMultiModal() {
     }
 
     multiFileUrlModal.modal('hide');
-
 
 }
 
