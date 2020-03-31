@@ -27,20 +27,38 @@ function addUrl(url) {
 
 }
 
-function addMultiUrl(urls) {
+function addMultiUrl(urls, page = 1) {
 
     const multiFileUrlModal = $("#multiFileUrlModal");
 
-    let x = 1;
+    let start;
 
-    while (x <= urls.length && x <= 5) {
-        element = $('#multiFileUrl' + x);
-        element.val(urls[x - 1]);
-        element.show();
-        $('#copyButton' + x).show();
-        x += 1;
+    if (page === 1) {
+        start = 1
+    }
+    else{
+        start = (page * 5) - 5
     }
 
+    let cur = start;
+    let elementNum = 1;
+
+    console.log(start);
+    console.log(elementNum);
+
+    while (cur <= urls.length && cur <= start + 5) {
+        console.log('here');
+        let element = $('#multiFileUrl' + elementNum);
+        element.val(urls[cur - 1]);
+        element.show();
+        $('#copyButton' + elementNum).show();
+        cur += 1;
+        elementNum += 1;
+
+        if (element === 6) {
+            break;
+        }
+    }
     multiFileUrlModal.modal('show');
 }
 

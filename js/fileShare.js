@@ -5,6 +5,7 @@ const MAXCHARS = 2000;
 let FILESTRING;
 let FILENAME;
 let FILEMIME;
+let URLS;
 
 
 function getQueryParam(name) {
@@ -71,6 +72,7 @@ function processFileString() {
         }
 
         addMultiUrl(urls);
+        URLS = urls;
 
     }
 }
@@ -179,4 +181,6 @@ function calculateJSDate(epoch) {
     return new Date(epoch);
 }
 
-
+function setMultiUrlPage(page) {
+    addMultiUrl(URLS, page);
+}
