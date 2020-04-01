@@ -1,5 +1,11 @@
 bootstrap.Toast.Default.delay = 5000;
-
+const multiFileUrlModal = $("#multiFileUrlModal");
+const multiFileUrlNext = $("#multiFileUrlNext");
+const multiFileUrlPrev = $("#multiFileUrlPrev");
+const multiFileSelectElements = {};
+const multiFileSelectCopyButtonElements = {};
+let multiFileSelectLock = false;
+let multiUrlCurrentPage = 1;
 
 function populateFileDetails(file) {
 
@@ -27,62 +33,91 @@ function addUrl(url) {
 
 }
 
-function addMultiUrl(urls, page = 1) {
-
-    const multiFileUrlModal = $("#multiFileUrlModal");
-    const multiFileUrlNext = $("#multiFileUrlNext");
-
-    let start;
-
-    if (page === 1) {
-        start = 1
-    }
-    else{
-        start = (page * 5) - 5
-    }
-
-    let cur = start;
-    let elementNum = 1;
-
-    while (cur <= urls.length && cur <= start + 5) {
-        console.log('here');
-        let element = $('#multiFileUrl' + elementNum);
-        element.val(urls[cur - 1]);
-        element.show();
-        $('#copyButton' + elementNum).show();
-        cur += 1;
-        elementNum += 1;
-
-        if (element === 6) {
-            break;
-        }
-    }
-
-    multiFileUrlModal.modal('show');
-
-    if (page <= urls.length / 5) {
-        multiFileUrlNext.click(function() { setMultiUrlPage(page + 1) })
-    }
-
-
+function showMultiUrlNextPage() {
+    multiUrlCurrentPage = multiUrlCurrentPage + 1;
+    addMultiUrl(getUrls(), multiUrlCurrentPage);
 }
 
-function closeMultiModal() {
+function showMultiUrlPrevPage() {
+    multiUrlCurrentPage = multiUrlCurrentPage - 1;
+    addMultiUrl(getUrls(), multiUrlCurrentPage);
+}
 
-    const multiFileUrlModal = $("#multiFileUrlModal");
+function clearMultiUrlPage() {
+    multiUrlCurrentPage = 1;
+}
 
-    let x = 1;
+function addMultiUrl(urls, page = 1) {
 
-    while (x <= 5) {
+    if (!multiFileSelectLock) {
+        multiFileSelectLock = true;
 
-        element = $('#multiFileUrl' + x);
-        element.val('');
-        element.hide();
-        $('#copyButton' + x).hide();
-        x += 1;
+        let start;
+
+        if (page === 1) {
+            start = 1
+        } else {
+            start = (page * 5) - 5
+        }
+
+        let cur = start;
+        let elementNum = 1;
+
+        console.log(cur);
+
+        while (cur <= start + 5) {
+
+            let element;
+            let copyButton;
+
+            if (!multiFileSelectElements.hasOwnProperty('#multiFileUrl' + elementNum)) {
+                element = $('#multiFileUrl' + elementNum);
+                copyButton = $('#copyButton' + elementNum);
+                multiFileSelectCopyButtonElements['#copyButton' + elementNum] = copyButton;
+                multiFileSelectElements['#multiFileUrl' + elementNum] = element;
+            } else {
+                element = multiFileSelectElements['#multiFileUrl' + elementNum];
+                copyButton = multiFileSelectCopyButtonElements['#copyButton' + elementNum];
+            }
+
+            if (cur <= urls.length) {
+                element.val(urls[cur - 1]);
+                element.show();
+                copyButton.show();
+            } else {
+                element.hide();
+                copyButton.hide();
+            }
+
+            cur += 1;
+            elementNum += 1;
+
+            if (element === 6) {
+                break;
+            }
+        }
+
+        multiFileUrlModal.modal('show');
+
+        if (page <= urls.length / 5) {
+            multiFileUrlNext.show();
+        } else {
+            multiFileUrlNext.hide();
+        }
+
+        if (page !== 1) {
+            multiFileUrlPrev.show();
+        } else {
+            multiFileUrlPrev.hide();
+        }
+
+        multiFileSelectLock = false;
+
+    }
+    else {
+        console.log("lock hit");
     }
 
-    multiFileUrlModal.modal('hide');
 
 }
 
@@ -118,6 +153,7 @@ function cancelDetected() {
     flipPanel('fileDetails', false);
 
 }
+
 
 
 function handleMultiPartProcess() {

@@ -71,6 +71,7 @@ function processFileString() {
             part += 1;
         }
 
+        clearMultiUrlPage();
         addMultiUrl(urls);
         URLS = urls;
 
@@ -181,6 +182,6 @@ function calculateJSDate(epoch) {
     return new Date(epoch);
 }
 
-function setMultiUrlPage(page) {
-    addMultiUrl(URLS, page);
+function getUrls() {
+    return URLS;
 }
