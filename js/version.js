@@ -16,7 +16,8 @@ function lookupVersionData() {
 }
 
 function setVersionData(data) {
-    SOFTWARE_VERSION = new softwareInfo(data["software-version"], data["build-codename"], data["debug-mode"]);
+    SOFTWARE_VERSION = new softwareInfo(data["software-version"],
+        data["build-codename"], data["debug-mode"]);
 }
 
 function getVersionData() {

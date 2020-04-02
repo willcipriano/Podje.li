@@ -54,7 +54,7 @@ function addMultiUrl(urls, page) {
         if (page === 1) {
             start = 1
         } else {
-            start = (page * 5) - 5
+            start = (page * 5) - 4
         }
 
         let cur = start;
