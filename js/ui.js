@@ -47,10 +47,9 @@ function clearMultiUrlPage() {
     multiUrlCurrentPage = 1;
 }
 
-function addMultiUrl(urls, page = 1) {
+function addMultiUrl(urls, page) {
 
-    if (!multiFileSelectLock) {
-        multiFileSelectLock = true;
+    console.log(page);
 
         let start;
 
@@ -63,30 +62,45 @@ function addMultiUrl(urls, page = 1) {
         let cur = start;
         let elementNum = 1;
 
-        console.log(cur);
-
         while (cur <= start + 5) {
 
             let element;
             let copyButton;
 
             if (!multiFileSelectElements.hasOwnProperty('#multiFileUrl' + elementNum)) {
+
                 element = $('#multiFileUrl' + elementNum);
                 copyButton = $('#copyButton' + elementNum);
                 multiFileSelectCopyButtonElements['#copyButton' + elementNum] = copyButton;
                 multiFileSelectElements['#multiFileUrl' + elementNum] = element;
+
             } else {
+
                 element = multiFileSelectElements['#multiFileUrl' + elementNum];
                 copyButton = multiFileSelectCopyButtonElements['#copyButton' + elementNum];
+
             }
 
             if (cur <= urls.length) {
                 element.val(urls[cur - 1]);
-                element.show();
-                copyButton.show();
+
+                if (element.is(":hidden")) {
+                    element.show();
+                }
+
+                if (copyButton.is(":hidden")) {
+                    copyButton.show();
+                }
+
             } else {
-                element.hide();
-                copyButton.hide();
+
+                if (element.is(":visible")) {
+                    element.hide();
+                }
+
+                if (copyButton.is(":visible")) {
+                    copyButton.hide();
+                }
             }
 
             cur += 1;
@@ -97,28 +111,33 @@ function addMultiUrl(urls, page = 1) {
             }
         }
 
-        multiFileUrlModal.modal('show');
-
         if (page <= urls.length / 5) {
-            multiFileUrlNext.show();
+
+            if (multiFileUrlNext.is(":hidden")) {
+                multiFileUrlNext.show();
+            }
+
         } else {
-            multiFileUrlNext.hide();
+
+            if (multiFileUrlNext.is(":visible")) {
+                multiFileUrlNext.hide();
+            }
         }
 
+        console.log(page);
+
         if (page !== 1) {
-            multiFileUrlPrev.show();
-        } else {
+            console.log('Page is not one');
+
+            if (multiFileUrlPrev.is(":hidden")) {
+            multiFileUrlPrev.show(); }
+
+        } else if (page === 1) {
+            console.log("page is one");
             multiFileUrlPrev.hide();
         }
 
-        multiFileSelectLock = false;
-
-    }
-    else {
-        console.log("lock hit");
-    }
-
-
+    multiFileUrlModal.modal('show');
 }
 
 function flipPanel(panelName, direction = true) {

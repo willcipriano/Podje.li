@@ -72,7 +72,7 @@ function processFileString() {
         }
 
         clearMultiUrlPage();
-        addMultiUrl(urls);
+        addMultiUrl(urls, 1);
         URLS = urls;
 
     }
