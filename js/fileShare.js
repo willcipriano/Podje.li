@@ -16,11 +16,13 @@ function getQueryParam(name) {
 }
 
 function loadFile() {
+    setDebugStatus("loading file");
     FILEREADER.readAsDataURL(FILESELECTOR[0].files[0]);
     FILEREADER.onloadend = processFileString;
 }
 
 function processFileString() {
+    setDebugStatus("Processing file string");
 
     FILEMIME = FILEREADER.result.split(",", 1)[0];
 
@@ -80,13 +82,20 @@ function processFileString() {
 
 
 function multipartFileProcessRegister() {
-    localStorage.setItem("filename", decodeURIComponent(getQueryParam("n")));
-    localStorage.setItem("mime", decodeURIComponent(getQueryParam("m")));
-    localStorage.setItem("total_parts", parseInt(getQueryParam("pt")));
+    setDebugStatus("Processing MultiPart File");
+
+    const filename = decodeURIComponent(getQueryParam("n"));
+    const mime = decodeURIComponent(getQueryParam("m"));
+    const totalParts = parseInt(getQueryParam("pt"));
+
+    localStorage.setItem("filename", filename);
+    localStorage.setItem("mime", mime);
+    localStorage.setItem("total_parts", totalParts);
     localStorage.setItem("file_part_0001", getQueryParam("mp"));
 }
 
 function multipartFileProcessAdd() {
+    const filePart = getQueryParam("p");
     localStorage.setItem("file_part_" + getQueryParam("p"), getQueryParam("mp"));
 }
 
@@ -137,6 +146,7 @@ function appendZeros(partNo) {
 
 
 function assembleMultiPartFile() {
+    setDebugStatus("Starting to assemble multipart file");
     let fileEncoded = "";
     const totalParts = localStorage.getItem("total_parts");
 
@@ -153,6 +163,7 @@ function assembleMultiPartFile() {
 
 
 function loadSingleFileFromQueryParam() {
+    setDebugStatus("loading single file from query param");
     const fileBlob = Base64String.decompressFromUTF16(decodeURIComponent(getQueryParam("pl")));
     const fileBase64 = decodeURIComponent(getQueryParam("m")) + "," + fileBlob;
     saveAs(dataUrlToBlob(fileBase64), getQueryParam("n"));
@@ -160,6 +171,7 @@ function loadSingleFileFromQueryParam() {
 
 
 function dataUrlToBlob(dataUrl) {
+    setDebugStatus("Converting dataurl to blob");
     let array = dataUrl.split(",");
     let mimeType = array[0].match(/:(.*?);/)[1];
     let base64 = atob(array[1]);

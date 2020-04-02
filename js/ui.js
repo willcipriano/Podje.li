@@ -45,7 +45,12 @@ function showAboutModal() {
             html: true,
             title: "<i>pôdela</i><br><b>Noun</b> - the action of separating something into parts or the process of being separated."
         });
+
         aboutModalTitle.text("PODJE.LI - Version " + versionInfo.softwareVersion);
+        aboutModalTitle.tooltip({
+            html: true,
+            title: "<b>CODENAME:</b> '<i>" + versionInfo.buildCodename + "</i>'"
+        })
 
         aboutHeader.text("");
         $("#aboutSignOff").html("<br>");
@@ -256,7 +261,29 @@ function copyFromMultiSelect(number) {
 }
 
 
+function showDebugModal() {
+
+    const debugStatus = $("#debugStatus");
+    const debugMessage = $("#debugMessage");
+    const debugModal = $("#debugModal");
+    const debugListGroup = $("#debugListGroup");
+    const debugMessages = getDebugMessages();
+
+    debugStatus.text(getDebugStatus());
+    debugMessage.text(getDebugMessage());
+
+    let x;
+    for (x = 0; x < debugMessages.length; x++) {
+        debugListGroup.append("<li class='list-group-item'>" + debugMessages[x] + "</li>")
+    }
+
+    debugModal.modal("show");
+
+}
+
+
 $(document).ready(function () {
+    setDebugMessage("Starting ui.js initialization");
     let placeholderText;
     let fileSelector = $("#fileSelector");
 
@@ -294,7 +321,11 @@ $(document).ready(function () {
     fileSelector.on('change', newFileDetected);
     fileSelector.on('fileclear', cancelDetected);
 
+    setDebugMessage("Showing file selector pane");
     flipPanel("fileSelectorPane");
 
     handleMultiPartProcess();
+
+    setDebugMessage("ui.js initialization completed");
+    setDebugStatus("UI initialization completed");
 });

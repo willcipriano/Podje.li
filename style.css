@@ -53,6 +53,14 @@
     height: 150px;
 }
 
+#debugListGroup {
+    max-height: 300px;
+    overflow:scroll;
+}
+
+#debugButton {
+    display: none;
+}
 
 @media (min-width: 1200px) {
 

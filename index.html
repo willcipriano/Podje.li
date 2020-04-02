@@ -334,6 +334,35 @@
 
             </div>
             <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button" onclick="showDebugModal()"
+                        id="debugButton">
+                    Debug</button>
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div aria-hidden="true" class="modal fade" id="debugModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="debugModalTitle">Debug Monitor</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <b>Current Debug Status:</b><div id="debugStatus"></div>
+                <hr>
+                <b>Current Debug Message:</b><div id="debugMessage"></div>
+                <hr>
+                <b>Recent Messages:</b>
+                <ul class="list-group" id="debugListGroup"></ul>
+
+            </div>
+            <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
             </div>
         </div>
@@ -370,6 +399,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/base64-string.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/theaterjs@3.2.0/dist/theater.min.js"></script>
+<script src="js/debug.js"></script>
 <script src="js/fileShare.js"></script>
 <script src="js/ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/js/fileinput.min.js"></script>

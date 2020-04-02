@@ -1,19 +1,23 @@
 let SOFTWARE_VERSION = false;
+let ONLINE = false;
 
 class softwareInfo {
-
     constructor(softwareVersion, buildCodename, debugMode, aboutSignOff) {
         this.softwareVersion = softwareVersion;
         this.buildCodename = buildCodename;
         this.debugMode = debugMode;
         this.aboutSignOff = aboutSignOff;
     }
-
 }
 
 function lookupVersionData() {
     $.getJSON("about.json", setVersionData)
-        .then(reportSoftwareVersion);
+        .then(reportSoftwareVersion)
+        .then(setOnline);
+}
+
+function setOnline() {
+    ONLINE = true;
 }
 
 function setVersionData(data) {
@@ -26,7 +30,6 @@ function getVersionData() {
     if (SOFTWARE_VERSION === false) {
         lookupVersionData();
     }
-
     return SOFTWARE_VERSION;
 }
 
