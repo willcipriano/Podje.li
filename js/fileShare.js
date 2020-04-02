@@ -1,13 +1,15 @@
+"use strict";
 const FILESELECTOR = $("#fileSelector");
-const FILEREADER = new FileReader;
+const FILEREADER = new FileReader();
 const MAXCHARS = 2000;
 let FILESTRING;
 let FILENAME;
 let FILEMIME;
+let URLS;
 
 
 function getQueryParam(name) {
-    const results = new RegExp('[\?&]' + name + '=([^&#]*)')
+    const results = new RegExp("[\?&]" + name + "=([^&#]*)")
         .exec(window.location.search);
 
     return (results !== null) ? results[1] || 0 : false;
@@ -20,15 +22,15 @@ function loadFile() {
 
 function processFileString() {
 
-    FILEMIME = FILEREADER.result.split(',', 1)[0];
+    FILEMIME = FILEREADER.result.split(",", 1)[0];
 
     FILENAME = FILESELECTOR[0].files[0].name;
-    FILESTRING = encodeURIComponent(Base64String.compressToUTF16(FILEREADER.result.split(',', 2)[1]));
+    FILESTRING = encodeURIComponent(Base64String.compressToUTF16(FILEREADER.result.split(",", 2)[1]));
 
-    let baseUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
-    let basicUrl = baseUrl + '?m=' + encodeURIComponent(FILEMIME) + '&n=' + encodeURIComponent(FILENAME) + '&pl=';
-    let multiPartStartBaseUrl = baseUrl + '?m=' + encodeURIComponent(FILEMIME) + '&n=' + encodeURIComponent(FILENAME) + '&pt=0000';
-    let multiPartUrl = baseUrl + '&p=0000';
+    let baseUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    let basicUrl = baseUrl + "?m=" + encodeURIComponent(FILEMIME) + "&n=" + encodeURIComponent(FILENAME) + "&pl=";
+    let multiPartStartBaseUrl = baseUrl + "?m=" + encodeURIComponent(FILEMIME) + "&n=" + encodeURIComponent(FILENAME) + "&pt=0000";
+    let multiPartUrl = baseUrl + "&p=0000";
 
 
     let basicUrlMode = false;
@@ -38,17 +40,16 @@ function processFileString() {
     }
 
     if (basicUrlMode) {
-        addUrl(basicUrl + FILESTRING)
+        addUrl(basicUrl + FILESTRING);
     } else {
 
         const multiPartUrlLength = multiPartUrl.length + 4;
         const charsAfterFirstUrl = FILESTRING.length - (MAXCHARS - multiPartStartBaseUrl.length + 4);
         const totalUrlsRequired = Math.ceil(charsAfterFirstUrl / (MAXCHARS - multiPartUrlLength)) + 1;
 
-
         let fileStringPos;
 
-        let url = multiPartStartBaseUrl.replace('0000', appendZeros(totalUrlsRequired));
+        let url = multiPartStartBaseUrl.replace("0000", appendZeros(totalUrlsRequired));
         fileStringPos = MAXCHARS - (url.length + 4);
         url = url + "&mp=" + FILESTRING.substring(0, fileStringPos);
 
@@ -62,7 +63,7 @@ function processFileString() {
             let partNo = appendZeros(part);
 
             let prevPos = fileStringPos;
-            let url = window.location.protocol + '//' + window.location.host + window.location.pathname + '?p=' + partNo + '&mp=';
+            let url = window.location.protocol + "//" + window.location.host + window.location.pathname + "?p=" + partNo + "&mp=";
             fileStringPos = fileStringPos + (MAXCHARS - url.length);
 
             url = url + FILESTRING.substring(prevPos, fileStringPos);
@@ -70,7 +71,9 @@ function processFileString() {
             part += 1;
         }
 
-        addMultiUrl(urls);
+        clearMultiUrlPage();
+        addMultiUrl(urls, 1);
+        URLS = urls;
 
     }
 }
@@ -91,7 +94,7 @@ function detectTotalPartsCompleted() {
 
     let x = 1;
     let partsFound = [];
-    const totalParts = parseInt(localStorage.getItem('total_parts'));
+    const totalParts = parseInt(localStorage.getItem("total_parts"));
 
     while (x <= totalParts) {
 
@@ -103,17 +106,17 @@ function detectTotalPartsCompleted() {
 
     if (partsFound.length === totalParts) {
 
-        $('#fileCompleteMessage').text('Complete file found!');
-        $('#fileFoundModal').modal('show');
+        $("#fileCompleteMessage").text("Complete file found!");
+        $("#fileFoundModal").modal("show");
         return true;
 
     } else {
 
-        $('#filePartMessage').text(partsFound.length + " parts found!");
+        $("#filePartMessage").text(partsFound.length + " parts found!");
     }
 
 
-    if (partsFound.length < localStorage.getItem('total_parts')) {
+    if (partsFound.length < localStorage.getItem("total_parts")) {
         setTimeout(detectTotalPartsCompleted, 2000);
         return false;
     }
@@ -122,7 +125,6 @@ function detectTotalPartsCompleted() {
 }
 
 function appendZeros(partNo) {
-
     partNo = partNo.toString();
 
     while (partNo.length < 4) {
@@ -134,39 +136,31 @@ function appendZeros(partNo) {
 }
 
 
-function copyFromMultiSelect(number) {
-    $('multiFileUrl' + number).select();
-    document.execCommand('copy');
-}
-
 function assembleMultiPartFile() {
-
-    let fileEncoded = '';
-    const totalParts = localStorage.getItem('total_parts');
+    let fileEncoded = "";
+    const totalParts = localStorage.getItem("total_parts");
 
     let i;
     for (i = 1; i <= totalParts; i++) {
-        fileEncoded += localStorage.getItem("file_part_" + appendZeros(i))
+        fileEncoded += localStorage.getItem("file_part_" + appendZeros(i));
     }
 
-
     let fileBlob = Base64String.decompressFromUTF16(decodeURIComponent(fileEncoded));
-    fileBlob = decodeURIComponent(localStorage.getItem('mime')) + ',' + fileBlob;
+    fileBlob = decodeURIComponent(localStorage.getItem("mime")) + "," + fileBlob;
 
-    saveAs(dataUrlToBlob(fileBlob), localStorage.getItem('filename'));
+    saveAs(dataUrlToBlob(fileBlob), localStorage.getItem("filename"));
 }
 
 
 function loadSingleFileFromQueryParam() {
-    const fileBlob = Base64String.decompressFromUTF16(decodeURIComponent(getQueryParam('pl')));
-    const fileBase64 = decodeURIComponent(getQueryParam('m')) + ',' + fileBlob;
-    saveAs(dataUrlToBlob(fileBase64), getQueryParam("n"))
-};
+    const fileBlob = Base64String.decompressFromUTF16(decodeURIComponent(getQueryParam("pl")));
+    const fileBase64 = decodeURIComponent(getQueryParam("m")) + "," + fileBlob;
+    saveAs(dataUrlToBlob(fileBase64), getQueryParam("n"));
+}
 
 
 function dataUrlToBlob(dataUrl) {
-
-    let array = dataUrl.split(',');
+    let array = dataUrl.split(",");
     let mimeType = array[0].match(/:(.*?);/)[1];
     let base64 = atob(array[1]);
     let x = base64.length;
@@ -180,10 +174,14 @@ function dataUrlToBlob(dataUrl) {
 }
 
 function calculateJSDate(epoch) {
-    if (epoch < 9999999999)
+    if (epoch < 9999999999) {
         epoch *= 1000;
+    }
+
     epoch = epoch + (new Date().getTimezoneOffset() * -1);
     return new Date(epoch);
 }
 
-
+function getUrls() {
+    return URLS;
+}

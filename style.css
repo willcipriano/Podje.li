@@ -10,6 +10,14 @@
     display: none;
 }
 
+.multiFile {
+    display: none;
+}
+
+.toast-header {
+    background-color: #5cb85c;
+}
+
 .form-control:focus,
 .form-contol:active {
     outline:none !important;
