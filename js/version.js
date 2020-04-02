@@ -2,10 +2,11 @@ let SOFTWARE_VERSION = false;
 
 class softwareInfo {
 
-    constructor(softwareVersion, buildCodename, debugMode) {
+    constructor(softwareVersion, buildCodename, debugMode, aboutSignOff) {
         this.softwareVersion = softwareVersion;
         this.buildCodename = buildCodename;
         this.debugMode = debugMode;
+        this.aboutSignOff = aboutSignOff;
     }
 
 }
@@ -17,7 +18,7 @@ function lookupVersionData() {
 
 function setVersionData(data) {
     SOFTWARE_VERSION = new softwareInfo(data["software-version"],
-        data["build-codename"], data["debug-mode"]);
+        data["build-codename"], data["debug-mode"], data["about-sign-off"]);
 }
 
 function getVersionData() {
@@ -39,6 +40,4 @@ function reportSoftwareVersion() {
     }
 }
 
-$(document).ready(function() {
-    lookupVersionData();
-});
+lookupVersionData();

@@ -1,5 +1,6 @@
 {
-  "software-version": "0.2.1",
+  "software-version": "0.2.3",
   "build-codename": "early-days",
-  "debug-mode": true
+  "debug-mode": true,
+  "about-sign-off": "Caveat Emptor!"
 }

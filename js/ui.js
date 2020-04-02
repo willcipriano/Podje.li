@@ -4,8 +4,8 @@ const multiFileUrlNext = $("#multiFileUrlNext");
 const multiFileUrlPrev = $("#multiFileUrlPrev");
 const multiFileSelectElements = {};
 const multiFileSelectCopyButtonElements = {};
-let multiFileSelectLock = false;
 let multiUrlCurrentPage = 1;
+let aboutModalLock = false;
 
 function populateFileDetails(file) {
 
@@ -33,6 +33,36 @@ function addUrl(url) {
 
 }
 
+function showAboutModal() {
+
+
+        const versionInfo = getVersionData();
+        const modal = $("#aboutModal");
+        const aboutModalTitle = $("#aboutModalTitle");
+        const aboutHeader = $("#aboutHeader");
+
+        aboutHeader.tooltip({
+            html: true,
+            title: "<i>pôdela</i><br><b>Noun</b> - the action of separating something into parts or the process of being separated."
+        });
+        aboutModalTitle.text("PODJE.LI - Version " + versionInfo.softwareVersion);
+
+        aboutHeader.text("");
+        $("#aboutSignOff").html("<br>");
+
+        modal.modal('show');
+
+        const theater = theaterJS();
+
+        theater.addActor('aboutHeader');
+        theater.addActor("aboutSignOff");
+
+        theater.addScene("aboutHeader:PODJE.LI");
+        theater.addScene("aboutSignOff:" + versionInfo.aboutSignOff);
+        theater.play();
+
+}
+
 function showMultiUrlNextPage() {
     multiUrlCurrentPage = multiUrlCurrentPage + 1;
     addMultiUrl(getUrls(), multiUrlCurrentPage);
@@ -48,7 +78,7 @@ function clearMultiUrlPage() {
 }
 
 function addMultiUrl(urls, page) {
-    
+
         let start;
 
         if (page === 1) {
@@ -109,20 +139,27 @@ function addMultiUrl(urls, page) {
             }
         }
 
-        if (page <= urls.length / 5) {
+        console.log(page);
+        console.log(urls.length / 5);
+
+        if (page < urls.length / 5) {
 
             if (multiFileUrlNext.is(":hidden")) {
                 multiFileUrlNext.show();
+            }}
+
+
+        else if (page === urls.length / 5) {
+                multiFileUrlNext.hide();
             }
 
-        } else {
+         else {
 
             if (multiFileUrlNext.is(":visible")) {
                 multiFileUrlNext.hide();
             }
         }
 
-        console.log(page);
 
         if (page !== 1) {
             if (multiFileUrlPrev.is(":hidden")) {
@@ -206,18 +243,20 @@ function copyFromMultiSelect(number) {
 
         navigator.clipboard.writeText(multiFileUrl.val())
             .then(() => {
-                toast("URL #" + number + " copied to your clipboard successfully.");
+                toast("URL #" + (number  + (5 * multiUrlCurrentPage) - 5) + " copied to your clipboard successfully.");
             })
             .catch(err => {
                 toast("URL #" + number + " copied to your clipboard unsuccessfully.");
-                console.log('clipboard copy error: ' + err);
+
+                if (getVersionData().debugMode()) {
+                console.log('clipboard copy error: ' + err); }
+
             });
 
 }
 
 
 $(document).ready(function () {
-
     let placeholderText;
     let fileSelector = $("#fileSelector");
 
@@ -258,5 +297,4 @@ $(document).ready(function () {
     flipPanel("fileSelectorPane");
 
     handleMultiPartProcess();
-
 });

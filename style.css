@@ -61,5 +61,8 @@
         top: -60px;
     }
 
+}
 
+#aboutButton{
+    z-index: 99;
 }
