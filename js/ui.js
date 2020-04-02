@@ -48,9 +48,7 @@ function clearMultiUrlPage() {
 }
 
 function addMultiUrl(urls, page) {
-
-    console.log(page);
-
+    
         let start;
 
         if (page === 1) {
@@ -127,14 +125,15 @@ function addMultiUrl(urls, page) {
         console.log(page);
 
         if (page !== 1) {
-            console.log('Page is not one');
-
             if (multiFileUrlPrev.is(":hidden")) {
             multiFileUrlPrev.show(); }
 
         } else if (page === 1) {
-            console.log("page is one");
             multiFileUrlPrev.hide();
+        }
+        else {
+            if (multiFileUrlPrev.is(":visible")) {
+            multiFileUrlPrev.hide(); }
         }
 
     multiFileUrlModal.modal('show');
