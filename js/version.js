@@ -30,6 +30,7 @@ function getVersionData() {
     if (SOFTWARE_VERSION === false) {
         lookupVersionData();
     }
+
     return SOFTWARE_VERSION;
 }
 

@@ -1,5 +1,7 @@
 let DEBUG_STATUS;
 let DEBUG_MESSAGE;
+let VERSION_CHECKS = 0;
+let DEBUG_INIT = false;
 const DEBUG_MESSAGES = [];
 
 async function setDebugStatus(newStatus) {
@@ -33,17 +35,42 @@ function getDebugMessages() {
     return DEBUG_MESSAGES;
 }
 
-$(document).ready(function () {
-
-if (getVersionData().debugMode) {
-    DEBUG_STATUS = "nominal";
-    DEBUG_MESSAGE = "online";
-    DEBUG_MESSAGES.push("online");
-    $("#debugButton").show();
+function getDebugInit() {
+    return DEBUG_INIT;
 }
-else {
-    DEBUG_STATUS = "disabled";
-    DEBUG_MESSAGE = "disabled";
-    DEBUG_MESSAGES.push("disabled");
-    $("#debugButton").hide();
-} });
+
+function debugSetup() {
+    if (getVersionData().debugMode) {
+        DEBUG_STATUS = "nominal";
+        DEBUG_MESSAGE = "online";
+        DEBUG_MESSAGES.push("online");
+        $("#debugButton").show();
+        DEBUG_INIT = true;
+    }
+    else {
+        DEBUG_STATUS = "disabled";
+        DEBUG_MESSAGE = "disabled";
+        DEBUG_MESSAGES.push("disabled");
+        $("#debugButton").hide();
+        DEBUG_INIT = true;
+    }
+}
+
+async function debugCheckVersion() {
+    if (VERSION_CHECKS > 3) {
+        return false;
+    }
+
+    if (getVersionData() === false) {
+        VERSION_CHECKS += 1;
+        setTimeout(debugCheckVersion, 100)
+    }
+    else {
+        return true;
+    }
+
+}
+
+$(document).ready(function () {
+    debugCheckVersion().then(debugSetup);
+});

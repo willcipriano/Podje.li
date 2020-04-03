@@ -54,8 +54,8 @@
 }
 
 #debugListGroup {
-    max-height: 300px;
-    overflow:scroll;
+    max-height: 200px;
+    overflow:auto !important;;
 }
 
 #debugButton {

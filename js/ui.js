@@ -34,8 +34,6 @@ function addUrl(url) {
 }
 
 function showAboutModal() {
-
-
         const versionInfo = getVersionData();
         const modal = $("#aboutModal");
         const aboutModalTitle = $("#aboutModalTitle");
@@ -263,21 +261,26 @@ function copyFromMultiSelect(number) {
 
 function showDebugModal() {
 
-    const debugStatus = $("#debugStatus");
-    const debugMessage = $("#debugMessage");
-    const debugModal = $("#debugModal");
-    const debugListGroup = $("#debugListGroup");
-    const debugMessages = getDebugMessages();
+    if (getDebugInit()) {
+        const debugStatus = $("#debugStatus");
+        const debugMessage = $("#debugMessage");
+        const debugModal = $("#debugModal");
+        const debugListGroup = $("#debugListGroup");
+        const debugMessages = getDebugMessages();
 
-    debugStatus.text(getDebugStatus());
-    debugMessage.text(getDebugMessage());
+        debugStatus.text(getDebugStatus());
+        debugMessage.text(getDebugMessage());
 
-    let x;
-    for (x = 0; x < debugMessages.length; x++) {
-        debugListGroup.append("<li class='list-group-item'>" + debugMessages[x] + "</li>")
+        let x;
+        for (x = debugMessages.length - 1; x > 0; x--) {
+            debugListGroup.append("<li class='list-group-item'>" + debugMessages[x - 1] + "</li>")
+        }
+
+        debugModal.modal("show");
     }
-
-    debugModal.modal("show");
+    else {
+        alert("debug has not started up yet");
+    }
 
 }
 
