@@ -15,14 +15,18 @@ function getQueryParam(name) {
     return (results !== null) ? results[1] || 0 : false;
 }
 
-function loadFile() {
+async function loadFile() {
     setDebugStatus("loading file");
     FILEREADER.readAsDataURL(FILESELECTOR[0].files[0]);
     FILEREADER.onloadend = processFileString;
 }
 
-function processFileString() {
-    setDebugStatus("Processing file string");
+function getFileName() {
+    return FILENAME;
+}
+
+async function processFileString() {
+    setDebugStatus("Processing file");
 
     FILEMIME = FILEREADER.result.split(",", 1)[0];
 
@@ -73,10 +77,8 @@ function processFileString() {
             part += 1;
         }
 
-        clearMultiUrlPage();
-        addMultiUrl(urls, 1);
         URLS = urls;
-
+        userFileProcessCompleted(URLS);
     }
 }
 
@@ -95,7 +97,6 @@ function multipartFileProcessRegister() {
 }
 
 function multipartFileProcessAdd() {
-    const filePart = getQueryParam("p");
     localStorage.setItem("file_part_" + getQueryParam("p"), getQueryParam("mp"));
 }
 
@@ -189,11 +190,14 @@ function calculateJSDate(epoch) {
     if (epoch < 9999999999) {
         epoch *= 1000;
     }
-
     epoch = epoch + (new Date().getTimezoneOffset() * -1);
     return new Date(epoch);
 }
 
 function getUrls() {
     return URLS;
+}
+
+function getShareUrlsLength() {
+    return URLS.length;
 }

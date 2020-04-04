@@ -10,7 +10,7 @@ class softwareInfo {
     }
 }
 
-function lookupVersionData() {
+async function lookupVersionData() {
     $.getJSON("about.json", setVersionData)
         .then(reportSoftwareVersion)
         .then(setOnline);
@@ -26,11 +26,9 @@ function setVersionData(data) {
 }
 
 function getVersionData() {
-
     if (SOFTWARE_VERSION === false) {
         lookupVersionData();
     }
-
     return SOFTWARE_VERSION;
 }
 

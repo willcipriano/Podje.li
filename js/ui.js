@@ -5,10 +5,8 @@ const multiFileUrlPrev = $("#multiFileUrlPrev");
 const multiFileSelectElements = {};
 const multiFileSelectCopyButtonElements = {};
 let multiUrlCurrentPage = 1;
-let aboutModalLock = false;
 
 function populateFileDetails(file) {
-
     FILEMIME = file.type;
     const lastModified = calculateJSDate(file.lastModified);
 
@@ -24,7 +22,6 @@ function populateFileDetails(file) {
 }
 
 function addUrl(url) {
-
     const singleFileUrl = $("#singleFileUrl");
     const singleFileUrlModal = $("#singleFileUrlModal");
 
@@ -81,7 +78,6 @@ function clearMultiUrlPage() {
 }
 
 function addMultiUrl(urls, page) {
-
         let start;
 
         if (page === 1) {
@@ -142,9 +138,6 @@ function addMultiUrl(urls, page) {
             }
         }
 
-        console.log(page);
-        console.log(urls.length / 5);
-
         if (page < urls.length / 5) {
 
             if (multiFileUrlNext.is(":hidden")) {
@@ -200,16 +193,12 @@ function flipPanel(panelName, direction = true) {
 
 
 function newFileDetected() {
-
     const fileToBeSaved = FILESELECTOR[0].files[0];
     populateFileDetails(fileToBeSaved);
-
 }
 
 function cancelDetected() {
-
     flipPanel('fileDetails', false);
-
 }
 
 
@@ -236,6 +225,20 @@ function handleMultiPartProcess() {
 
 }
 
+function displayURLS() {
+    $("#fileResultModal").modal("hide");
+    addMultiUrl(getUrls(), 1);
+}
+
+
+function showFileResultModal() {
+    const modal = $('#fileResultModal');
+    const fileResultTotalUrls = $('#fileResultTotalUrls');
+
+    fileResultTotalUrls.text("We can squeeze that into roughly " + getShareUrlsLength() + " URL's.");
+    modal.modal('show');
+}
+
 function toast(toastBody) {
     $('.toast-body').text(toastBody);
     $('.toast').toast('show');
@@ -256,6 +259,42 @@ function copyFromMultiSelect(number) {
 
             });
 
+}
+
+function copyAsHtml() {
+
+    const filename = getFileName();
+    const urls = getUrls();
+
+    let html = '<p>' + filename + '</p>';
+    let x;
+
+    for (x = 0; x < urls.length; x++) {
+        html += "<p><a href='" + urls[x] + "'>Part " + x + "</a></p>\n";
+    }
+
+    navigator.clipboard.writeText(html)
+        .then(() => toast(filename + " copied to your clipboard successfully."));
+}
+
+function downloadAsCsv() {
+
+    const filename = getFileName();
+    const urls = getUrls();
+
+    let csv = "";
+    let x;
+
+    for (x = 0; x < urls.length; x++) {
+        console.log(urls);
+        csv += urls[x] + '\n';
+    }
+
+    let blob = new Blob([csv], {
+        type: "text/plain;charset=utf-8"
+    });
+
+    saveAs(blob, filename + ".podjeli.csv");
 }
 
 
@@ -279,9 +318,22 @@ function showDebugModal() {
         debugModal.modal("show");
     }
     else {
-        alert("debug has not started up yet");
+        alert("debug has not started up yet!");
     }
 
+}
+
+function userFileProcessCompleted(urls) {
+    setDebugStatus("File process UI startup");
+    clearMultiUrlPage();
+    showFileResultModal();
+}
+
+
+
+function processUserFile() {
+    setDebugStatus("User file share request");
+    loadFile();
 }
 
 
