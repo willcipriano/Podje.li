@@ -41,7 +41,7 @@
 
         <div class="col-sm-8 mx-auto">
 
-            <form id="fileSelectorPane" onsubmit="processUserFile(); return false;" style="display: none">
+            <form id="fileSelectorPane" onsubmit="loadFile(); return false;" style="display: none">
 
 
                 <input class="file form-control" data-show-preview="false" id="fileSelector" name="input-b2"
@@ -373,11 +373,45 @@
 <div aria-hidden="true" class="modal fade" id="fileResultModal" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+
             <div class="modal-body text-center">
                 <div class="h2" id="fileResultHeader">Your file is now ready to be shared!</div>
                 <div id="fileResultTotalUrls"></div>
                 <i>How would you like them?</i>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" onclick="showUrlFileSaveModal()">Save</button>
+                <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div aria-hidden="true" class="modal fade" id="urlFileSaveModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="urlFileSaveModalTitle"></h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div id="urlFileSaveModalMessage"></div>
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dbtn-danger" type="button" id="urlFileSaveModalDropDown"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Export File As:
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+
+                </div>
+            </div>
+
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-info" onclick="downloadAsCsv()">Download as CSV</button>
                 <button type="button" class="btn btn-info" onclick="copyAsHtml()">Copy as HTML</button>
@@ -388,8 +422,6 @@
     </div>
 </div>
 
-
-</div>
 
 <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
     <!-- Position it -->

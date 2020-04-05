@@ -1,6 +1,6 @@
 {
-  "software-version": "0.3.1",
+  "software-version": "0.3.1.2",
   "build-codename": "making-progress",
-  "debug-mode": false,
+  "debug-mode": true,
   "about-sign-off": "Caveat Emptor!"
 }

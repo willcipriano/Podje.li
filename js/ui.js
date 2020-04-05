@@ -330,10 +330,11 @@ function userFileProcessCompleted(urls) {
 }
 
 
+function showUrlFileSaveModal() {
+    $('#urlFileSaveModalMessage').html("You have <i>" + getShareUrlsLength() + "</i> URL's to store, how should I format them?");
+    $("#fileResultModal").modal('hide')
+        .then($("#urlFileSaveModal").modal('show'));
 
-function processUserFile() {
-    setDebugStatus("User file share request");
-    loadFile();
 }
 
 
@@ -383,4 +384,6 @@ $(document).ready(function () {
 
     setDebugMessage("ui.js initialization completed");
     setDebugStatus("UI initialization completed");
+
+    showUrlFileSaveModal();
 });

@@ -15,7 +15,7 @@ function getQueryParam(name) {
     return (results !== null) ? results[1] || 0 : false;
 }
 
-async function loadFile() {
+function loadFile() {
     setDebugStatus("loading file");
     FILEREADER.readAsDataURL(FILESELECTOR[0].files[0]);
     FILEREADER.onloadend = processFileString;
@@ -25,7 +25,7 @@ function getFileName() {
     return FILENAME;
 }
 
-async function processFileString() {
+function processFileString() {
     setDebugStatus("Processing file");
 
     FILEMIME = FILEREADER.result.split(",", 1)[0];

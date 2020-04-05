@@ -63,14 +63,14 @@ async function debugCheckVersion() {
 
     if (getVersionData() === false) {
         VERSION_CHECKS += 1;
-        setTimeout(debugCheckVersion, 100)
+        setTimeout(debugCheckVersion, 100);
     }
     else {
-        return true;
+        debugSetup();
     }
 
 }
 
 $(document).ready(function () {
-    debugCheckVersion().then(debugSetup);
+    debugCheckVersion()
 });
