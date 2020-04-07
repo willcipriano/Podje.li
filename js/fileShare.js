@@ -5,7 +5,7 @@ const MAXCHARS = 2000;
 let FILESTRING;
 let FILENAME;
 let FILEMIME;
-let URLS;
+let URLS = [];
 
 
 function getQueryParam(name) {

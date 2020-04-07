@@ -261,41 +261,18 @@ function copyFromMultiSelect(number) {
 
 }
 
-function copyAsHtml() {
+function outputURLS() {
 
-    const filename = getFileName();
-    const urls = getUrls();
+    encodeUrls(basicHTMLEncoder, '.html');
 
-    let html = '<p>' + filename + '</p>';
-    let x;
-
-    for (x = 0; x < urls.length; x++) {
-        html += "<p><a href='" + urls[x] + "'>Part " + x + "</a></p>\n";
-    }
-
-    navigator.clipboard.writeText(html)
-        .then(() => toast(filename + " copied to your clipboard successfully."));
 }
+
 
 function downloadAsCsv() {
-
-    const filename = getFileName();
-    const urls = getUrls();
-
-    let csv = "";
-    let x;
-
-    for (x = 0; x < urls.length; x++) {
-        console.log(urls);
-        csv += urls[x] + '\n';
-    }
-
-    let blob = new Blob([csv], {
-        type: "text/plain;charset=utf-8"
-    });
-
-    saveAs(blob, filename + ".podjeli.csv");
+    encodeUrls(basicCSVEncoder, '.csv', ['csvHeader', 'csvLineNumbers'], 'saveAsTextFile');
 }
+
+
 
 
 function showDebugModal() {

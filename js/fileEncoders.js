@@ -29,6 +29,8 @@ function basicCSVEncoder(encodeReq) {
     const quoteUrl = encodeReq.options.includes('csvQuoteURL');
     const excelStyleUrl = encodeReq.options.includes('csvExcelURL');
 
+    console.log(excelStyleUrl)
+
     if (encodeReq.options.includes('csvLineNumbers')) {
         if (encodeReq.options.includes('csvHeader')) {
             csv += "#,URL\n";
@@ -36,10 +38,7 @@ function basicCSVEncoder(encodeReq) {
 
         for (x = 0; x < encodeReq.urls.length; x++) {
 
-            if (excelStyleUrl) {
-                csv += x + ',=HYPERLINK("' + encodeReq.urls[x] + '\\")\n';
-            }
-            else if (quoteUrl){
+            if (quoteUrl){
                 csv += x + ",'" + encodeReq.urls[x] + "'\n";
             }
 
@@ -73,8 +72,8 @@ function encodeUrls(encoder, fileExtension, options = [],
                     outputType = "clipboard") {
     setDebugStatus('Starting encoder');
     const encodeReq = new encodeRequest(getFileName(),
-        fileExtension, getUrls(), options);
-    return encoder(encodeReq);
+        fileExtension, getUrls(), options, outputType);
+    returnUrls(encoder(encodeReq), encodeReq);
 }
 
 function returnUrls(text, encodeReq) {
@@ -85,6 +84,7 @@ function returnUrls(text, encodeReq) {
         copyToClipboard(text, encodeReq);
     }
 }
+
 
 function saveAsTextFile(text, encodeReq) {
     setDebugStatus("Saving as text");
