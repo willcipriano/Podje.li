@@ -29,7 +29,7 @@ function basicCSVEncoder(encodeReq) {
     const quoteUrl = encodeReq.options.includes('csvQuoteURL');
     const excelStyleUrl = encodeReq.options.includes('csvExcelURL');
 
-    console.log(excelStyleUrl)
+    console.log(excelStyleUrl);
 
     if (encodeReq.options.includes('csvLineNumbers')) {
         if (encodeReq.options.includes('csvHeader')) {

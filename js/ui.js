@@ -227,6 +227,7 @@ function handleMultiPartProcess() {
 
 function displayURLS() {
     $("#fileResultModal").modal("hide");
+    $('#urlFileSaveModal').modal("hide");
     addMultiUrl(getUrls(), 1);
 }
 
@@ -309,9 +310,14 @@ function userFileProcessCompleted(urls) {
 
 function showUrlFileSaveModal() {
     $('#urlFileSaveModalMessage').html("You have <i>" + getShareUrlsLength() + "</i> URL's to store, how should I format them?");
-    $("#fileResultModal").modal('hide')
-        .then($("#urlFileSaveModal").modal('show'));
+    $("#fileResultModal").modal('hide');
+    $("#urlFileSaveModal").modal('show');
 
+}
+
+function showExportMenu() {
+    flipPanel("fileSelectorPane", false);
+    $(".exportMenu").show();
 }
 
 
@@ -361,6 +367,4 @@ $(document).ready(function () {
 
     setDebugMessage("ui.js initialization completed");
     setDebugStatus("UI initialization completed");
-
-    showUrlFileSaveModal();
 });
