@@ -5,10 +5,8 @@ const multiFileUrlPrev = $("#multiFileUrlPrev");
 const multiFileSelectElements = {};
 const multiFileSelectCopyButtonElements = {};
 let multiUrlCurrentPage = 1;
-let aboutModalLock = false;
 
 function populateFileDetails(file) {
-
     FILEMIME = file.type;
     const lastModified = calculateJSDate(file.lastModified);
 
@@ -24,7 +22,6 @@ function populateFileDetails(file) {
 }
 
 function addUrl(url) {
-
     const singleFileUrl = $("#singleFileUrl");
     const singleFileUrlModal = $("#singleFileUrlModal");
 
@@ -81,7 +78,6 @@ function clearMultiUrlPage() {
 }
 
 function addMultiUrl(urls, page) {
-
         let start;
 
         if (page === 1) {
@@ -142,9 +138,6 @@ function addMultiUrl(urls, page) {
             }
         }
 
-        console.log(page);
-        console.log(urls.length / 5);
-
         if (page < urls.length / 5) {
 
             if (multiFileUrlNext.is(":hidden")) {
@@ -200,16 +193,12 @@ function flipPanel(panelName, direction = true) {
 
 
 function newFileDetected() {
-
     const fileToBeSaved = FILESELECTOR[0].files[0];
     populateFileDetails(fileToBeSaved);
-
 }
 
 function cancelDetected() {
-
     flipPanel('fileDetails', false);
-
 }
 
 
@@ -236,6 +225,21 @@ function handleMultiPartProcess() {
 
 }
 
+function displayURLS() {
+    $("#fileResultModal").modal("hide");
+    $('#urlFileSaveModal').modal("hide");
+    addMultiUrl(getUrls(), 1);
+}
+
+
+function showFileResultModal() {
+    const modal = $('#fileResultModal');
+    const fileResultTotalUrls = $('#fileResultTotalUrls');
+
+    fileResultTotalUrls.text("We can squeeze that into roughly " + getShareUrlsLength() + " URL's.");
+    modal.modal('show');
+}
+
 function toast(toastBody) {
     $('.toast-body').text(toastBody);
     $('.toast').toast('show');
@@ -258,6 +262,19 @@ function copyFromMultiSelect(number) {
 
 }
 
+function outputURLS() {
+
+    encodeUrls(basicHTMLEncoder, '.html');
+
+}
+
+
+function downloadAsCsv() {
+    encodeUrls(basicCSVEncoder, '.csv', ['csvHeader', 'csvLineNumbers'], 'saveAsTextFile');
+}
+
+
+
 
 function showDebugModal() {
 
@@ -279,9 +296,28 @@ function showDebugModal() {
         debugModal.modal("show");
     }
     else {
-        alert("debug has not started up yet");
+        alert("debug has not started up yet!");
     }
 
+}
+
+function userFileProcessCompleted(urls) {
+    setDebugStatus("File process UI startup");
+    clearMultiUrlPage();
+    showFileResultModal();
+}
+
+
+function showUrlFileSaveModal() {
+    $('#urlFileSaveModalMessage').html("You have <i>" + getShareUrlsLength() + "</i> URL's to store, how should I format them?");
+    $("#fileResultModal").modal('hide');
+    $("#urlFileSaveModal").modal('show');
+
+}
+
+function showExportMenu() {
+    flipPanel("fileSelectorPane", false);
+    $(".exportMenu").show();
 }
 
 
