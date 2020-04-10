@@ -63,8 +63,13 @@
 }
 
 .exportMenu {
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    position: absolute;
     display: none;
 }
+
+
 
 @media (min-width: 1200px) {
 
@@ -73,7 +78,94 @@
         top: -60px;
     }
 
+    .exportMenu {
+        top: 42%;
+        left: 50%;
+    }
+
 }
+
+
+@media (min-height: 1px) and (max-height: 249px) {
+
+    .exportMenu {
+        top: 68%;
+        left: 50%;
+    }
+
+}
+
+
+@media (min-height: 200px) and (max-height: 248px) {
+
+    .exportMenu {
+        top: 68%;
+        left: 50%;
+    }
+
+}
+
+
+@media (min-height: 249px) and (max-height: 291px) {
+
+    .exportMenu {
+        top: 68%;
+        left: 50%;
+    }
+
+}
+
+
+@media (min-height: 250px) and (max-height: 291px) {
+
+    .exportMenu {
+        top: 88%;
+        left: 50%;
+    }
+
+}
+
+
+
+@media (min-height: 292px) and (max-height: 400px) {
+
+    .exportMenu {
+        top: 62%;
+        left: 50%;
+    }
+
+}
+
+
+@media (min-height: 401px) and (max-height: 500px) {
+
+    .exportMenu {
+        top: 44%;
+        left: 50%;
+    }
+
+}
+
+@media (min-height: 501px) and (max-height: 731px) {
+
+    .exportMenu {
+        top: 36%;
+        left: 50%;
+    }
+
+}
+
+@media (min-height: 732px) and (max-height: 1024px) {
+
+    .exportMenu {
+        top: 24%;
+        left: 50%;
+    }
+
+}
+
+
+
 
 #aboutButton{
     z-index: 99;

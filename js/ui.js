@@ -321,6 +321,8 @@ function showExportMenu() {
 }
 
 
+
+
 $(document).ready(function () {
     setDebugMessage("Starting ui.js initialization");
     let placeholderText;
@@ -367,4 +369,6 @@ $(document).ready(function () {
 
     setDebugMessage("ui.js initialization completed");
     setDebugStatus("UI initialization completed");
+
+    showExportMenu();
 });
