@@ -14,6 +14,8 @@
           rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/css/fileinput.min.css" media="all"
           rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" media="all"
+          rel="stylesheet" type="text/css"/>
     <link href="style.css" media="all"
           rel="stylesheet" type="text/css"/>
 </head>
@@ -31,7 +33,8 @@
 
 <div class="container">
     <div class="text-center">
-        <img alt="PODJE.LI" class="center-block img-responsive" src="logo.png" style="width: 100%; height: auto;">
+        <img alt="PODJE.LI" class="center-block img-responsive" src="logo.png" id="logo" style="width: 100%; height:
+        auto;">
     </div>
 </div>
 
@@ -456,15 +459,22 @@
         </select>
     </div>
 
-    <div class="form-group text-center">
-        <label for="exportMethod">To my:</label>
-        <br>
-        <select class="selectpicker" id="exportMethod">
-            <option>Clipboard</option>
-            <option>File System</option>
-        </select>
-    </div>
-    </div>
+
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" data-toggle="toggle" data-style="podjele">
+                Copy to clipboard
+            </label>
+        </div>
+
+        <label class="checkbox-inline">
+            <input type="checkbox" data-toggle="toggle" class="form-contol"> Save to disk
+        </label>
+
+        <label class="checkbox-inline">
+            <input type="checkbox" data-toggle="toggle"> Compress results
+        </label>
 
     <div class="ExportBody"></div>
 
@@ -503,6 +513,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/base64-string.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/theaterjs@3.2.0/dist/theater.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script src="js/debug.js"></script>
 <script src="js/fileShare.js"></script>
 <script src="js/fileEncoders.js"></script>

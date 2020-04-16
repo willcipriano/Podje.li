@@ -70,13 +70,19 @@
 }
 
 
+/*PCs and Laptops*/
+
 
 @media (min-width: 1200px) {
-
     #fileSelectorContainer {
         position: relative;
         top: -60px;
     }
+
+}
+
+
+@media (min-width: 1400px) {
 
     .exportMenu {
         top: 42%;
@@ -85,8 +91,22 @@
 
 }
 
+@media (min-width: 1200px) {
 
-@media (min-height: 1px) and (max-height: 249px) {
+    .exportMenu {
+        top: 55%;
+        left: 50%;
+    }
+
+}
+
+
+
+
+
+/*Mobile devices*/
+
+@media (min-height: 1px) and (max-height: 200px) and (max-width: 1024px) {
 
     .exportMenu {
         top: 68%;
@@ -96,7 +116,7 @@
 }
 
 
-@media (min-height: 200px) and (max-height: 248px) {
+@media (min-height: 200px) and (max-height: 248px) and (max-width: 1024px) {
 
     .exportMenu {
         top: 68%;
@@ -106,7 +126,7 @@
 }
 
 
-@media (min-height: 249px) and (max-height: 291px) {
+@media (min-height: 249px) and (max-height: 291px) and (max-width: 1024px) {
 
     .exportMenu {
         top: 68%;
@@ -116,7 +136,7 @@
 }
 
 
-@media (min-height: 250px) and (max-height: 291px) {
+@media (min-height: 250px) and (max-height: 291px) and (max-width: 1024px){
 
     .exportMenu {
         top: 88%;
@@ -127,7 +147,7 @@
 
 
 
-@media (min-height: 292px) and (max-height: 400px) {
+@media (min-height: 292px) and (max-height: 400px) and (max-width: 1024px) {
 
     .exportMenu {
         top: 62%;
@@ -137,7 +157,7 @@
 }
 
 
-@media (min-height: 401px) and (max-height: 500px) {
+@media (min-height: 401px) and (max-height: 500px) and (max-width: 1024px){
 
     .exportMenu {
         top: 44%;
@@ -146,7 +166,7 @@
 
 }
 
-@media (min-height: 501px) and (max-height: 731px) {
+@media (min-height: 501px) and (max-height: 735px) and (max-width: 1024px) {
 
     .exportMenu {
         top: 36%;
@@ -155,10 +175,30 @@
 
 }
 
-@media (min-height: 732px) and (max-height: 1024px) {
+@media (min-height: 736px) and (max-height: 990px) and (max-width: 1024px) {
 
     .exportMenu {
         top: 24%;
+        left: 50%;
+    }
+
+}
+
+
+
+@media (min-height: 901px) and (max-height: 1024px) and (max-width: 1024px) {
+
+    .exportMenu {
+        top: 24%;
+        left: 50%;
+    }
+
+}
+
+@media (min-height: 1025px) and (max-height: 1366px) and (max-width: 1024px){
+
+    .exportMenu {
+        top: 22%;
         left: 50%;
     }
 
@@ -170,3 +210,6 @@
 #aboutButton{
     z-index: 99;
 }
+
+.toggle.podjele, .toggle-on.podjele, .toggle-off.podjele { border-radius: 20px; }
+.toggle.podjele .toggle-handle { border-radius: 20px; }

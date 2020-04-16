@@ -316,8 +316,12 @@ function showUrlFileSaveModal() {
 }
 
 function showExportMenu() {
+
+
     flipPanel("fileSelectorPane", false);
     $(".exportMenu").show();
+
+
 }
 
 
@@ -369,6 +373,4 @@ $(document).ready(function () {
 
     setDebugMessage("ui.js initialization completed");
     setDebugStatus("UI initialization completed");
-
-    showExportMenu();
 });
