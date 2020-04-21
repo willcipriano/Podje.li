@@ -14,8 +14,6 @@
           rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/css/fileinput.min.css" media="all"
           rel="stylesheet" type="text/css"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" media="all"
-          rel="stylesheet" type="text/css"/>
     <link href="style.css" media="all"
           rel="stylesheet" type="text/css"/>
 </head>
@@ -459,22 +457,32 @@
         </select>
     </div>
 
+        <div id="outputTypesContainer" class="container-fluid">
 
+            <div class="row">
 
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" data-toggle="toggle" data-style="podjele">
-                Copy to clipboard
+                <div class="col text-center">
+
+        <span class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary active">
+                <input type="checkbox" checked> Save to Disk
             </label>
+            <label class="btn btn-primary">
+                <input type="checkbox"> Compress Results
+            </label>
+        </span>
+        <span class="btn-group copyUrlsToClipboardSpan" data-toggle="buttons">
+            <label class="btn btn-primary active copyUrlsToClipboardButton">
+                <input type="checkbox" checked> Copy to Clipboard
+            </label>
+        </span>
+
+        </div>
+        </div>
         </div>
 
-        <label class="checkbox-inline">
-            <input type="checkbox" data-toggle="toggle" class="form-contol"> Save to disk
-        </label>
 
-        <label class="checkbox-inline">
-            <input type="checkbox" data-toggle="toggle"> Compress results
-        </label>
+
 
     <div class="ExportBody"></div>
 
@@ -513,7 +521,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/base64-string.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/theaterjs@3.2.0/dist/theater.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script src="js/debug.js"></script>
 <script src="js/fileShare.js"></script>
 <script src="js/fileEncoders.js"></script>

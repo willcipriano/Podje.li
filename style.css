@@ -211,5 +211,16 @@
     z-index: 99;
 }
 
-.toggle.podjele, .toggle-on.podjele, .toggle-off.podjele { border-radius: 20px; }
-.toggle.podjele .toggle-handle { border-radius: 20px; }
+#outputTypesContainer {
+    width: 400px;
+}
+
+.copyUrlsToClipboardSpan {
+    margin-top: 0;
+    position:relative;
+    top: -9px;
+}
+
+#copyUrlsToClipboardButton {
+    margin-top: 0;
+}
