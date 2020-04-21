@@ -323,6 +323,23 @@ function showExportMenu() {
 
 }
 
+function outputTypeButton(action) {
+    const saveButton = $("#outputTypesSave");
+    const compressButton = $("#outputTypesCompress");
+    const copyButton = $("#outputTypesCopy");
+
+    if (action == 'save') {
+
+        compressButton.prop('disabled', false);
+    }
+
+    if (action == 'copy') {
+        compressButton.prop('disabled', true);
+    }
+
+
+}
+
 
 
 

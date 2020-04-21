@@ -1,6 +1,6 @@
 {
-  "software-version": "0.4.1",
+  "software-version": "0.4.2",
   "build-codename": "whats-on-the-menu",
-  "debug-mode": true,
+  "debug-mode": false,
   "about-sign-off": "Caveat Emptor!"
 }

@@ -465,15 +465,16 @@
 
         <span class="btn-group" data-toggle="buttons">
             <label class="btn btn-primary active">
-                <input type="checkbox" checked> Save to Disk
+                <input type="checkbox" id="outputTypesSave" onclick="outputTypeButton('save')" checked> Save to
+                Disk
             </label>
             <label class="btn btn-primary">
-                <input type="checkbox"> Compress Results
+                <input type="checkbox" id="outputTypesCompress" onclick="outputTypeButton('compress')"> Compress Results
             </label>
         </span>
         <span class="btn-group copyUrlsToClipboardSpan" data-toggle="buttons">
             <label class="btn btn-primary active copyUrlsToClipboardButton">
-                <input type="checkbox" checked> Copy to Clipboard
+                <input type="checkbox" id="outputTypesCopy" onclick="outputTypeButton('copy')"> Copy to Clipboard
             </label>
         </span>
 
