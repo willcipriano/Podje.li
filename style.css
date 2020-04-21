@@ -69,6 +69,23 @@
     display: none;
 }
 
+#aboutButton{
+    z-index: 99;
+}
+
+#outputTypesContainer {
+    width: 400px;
+}
+
+.copyUrlsToClipboardSpan {
+    margin-top: 0;
+    position:relative;
+    top: -9px;
+}
+
+#copyUrlsToClipboardButton {
+    margin-top: 0;
+}
 
 /*PCs and Laptops*/
 
@@ -79,22 +96,18 @@
         top: -60px;
     }
 
+    .exportMenu {
+        top: 55%;
+        left: 50%;
+    }
+
 }
 
 
 @media (min-width: 1400px) {
 
     .exportMenu {
-        top: 42%;
-        left: 50%;
-    }
-
-}
-
-@media (min-width: 1200px) {
-
-    .exportMenu {
-        top: 55%;
+        top: 70%;
         left: 50%;
     }
 
@@ -204,20 +217,34 @@
 
 }
 
-#aboutButton{
-    z-index: 99;
-}
 
-#outputTypesContainer {
-    width: 400px;
-}
+/*@media (min-width:320px)  { !* smartphones, iPhone, portrait 480x320 phones *! }*/
+/*@media (min-width:481px)  { !* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. *! }*/
+/*@media (min-width:641px)  { !* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones *! }*/
+/*@media (min-width:961px)  { !* tablet, landscape iPad, lo-res laptops ands desktops *! }*/
+/*@media (min-width:1025px) {*/
+/*    !* big landscape tablets, laptops, and desktops *!*/
+/*    #fileUpload {*/
+/*        position: relative;*/
+/*        top: -70px;*/
+/*    }*/
 
-.copyUrlsToClipboardSpan {
-    margin-top: 0;
-    position:relative;
-    top: -9px;
-}
+/*    .exportMenu {*/
+/*        top: 50%;*/
+/*        left: 50%;*/
+/*    }*/
+/*}*/
 
-#copyUrlsToClipboardButton {
-    margin-top: 0;
-}
+
+/*@media (min-width:1281px) {*/
+/*    !* hi-res laptops and desktops *!*/
+/*    #fileUpload {*/
+/*        position: relative;*/
+/*        top: -70px;*/
+/*    }*/
+
+/*    .exportMenu {*/
+/*        top: 50%;*/
+/*        left: 50%;*/
+/*    }*/
+/*}*/

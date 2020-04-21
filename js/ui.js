@@ -324,23 +324,27 @@ function showExportMenu() {
 }
 
 function outputTypeButton(action) {
-    const saveButton = $("#outputTypesSave");
-    const compressButton = $("#outputTypesCompress");
-    const copyButton = $("#outputTypesCopy");
+    const saveCheckbox = $("#outputTypesSave");
+    const saveButton = $("#outputTypesSaveButton");
+    const compressCheckbox = $("#outputTypesCompress");
+    const compressButton = $("#outputTypesCompressButton");
+    const copyCheckbox = $("#outputTypesCopy");
+    const copyButton= $("#outputTypesCopyButton");
 
     if (action == 'save') {
-
+        compressCheckbox.prop('disabled', false);
         compressButton.prop('disabled', false);
+        copyCheckbox.prop('checked', false);
     }
 
     if (action == 'copy') {
+        compressCheckbox.prop('disabled', true);
         compressButton.prop('disabled', true);
+        saveCheckbox.prop('checked', false);
     }
 
 
 }
-
-
 
 
 $(document).ready(function () {

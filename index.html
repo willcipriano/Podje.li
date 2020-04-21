@@ -457,6 +457,8 @@
         </select>
     </div>
 
+        <h5>How would you like those url's prepared?</h5>
+
         <div id="outputTypesContainer" class="container-fluid">
 
             <div class="row">
@@ -464,16 +466,16 @@
                 <div class="col text-center">
 
         <span class="btn-group" data-toggle="buttons">
-            <label class="btn btn-primary active">
+            <label class="btn btn-primary active" id="outputTypesSaveButton">
                 <input type="checkbox" id="outputTypesSave" onclick="outputTypeButton('save')" checked> Save to
                 Disk
             </label>
-            <label class="btn btn-primary">
+            <label class="btn btn-primary" id="outputTypesCompressButton">
                 <input type="checkbox" id="outputTypesCompress" onclick="outputTypeButton('compress')"> Compress Results
             </label>
         </span>
         <span class="btn-group copyUrlsToClipboardSpan" data-toggle="buttons">
-            <label class="btn btn-primary active copyUrlsToClipboardButton">
+            <label class="btn btn-primary active copyUrlsToClipboardButton" id="outputTypesCopyButton">
                 <input type="checkbox" id="outputTypesCopy" onclick="outputTypeButton('copy')"> Copy to Clipboard
             </label>
         </span>
@@ -481,9 +483,6 @@
         </div>
         </div>
         </div>
-
-
-
 
     <div class="ExportBody"></div>
 
