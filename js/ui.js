@@ -312,16 +312,18 @@ function showUrlFileSaveModal() {
     $('#urlFileSaveModalMessage').html("You have <i>" + getShareUrlsLength() + "</i> URL's to store, how should I format them?");
     $("#fileResultModal").modal('hide');
     $("#urlFileSaveModal").modal('show');
+    
 
 }
 
 function showExportMenu() {
 
     $('#exportType').select2();
-
+    $('#exportHeader').text("We have " + getShareUrlsLength() + " urls for you!");
     flipPanel("fileSelectorPane", false);
-
+    flipPanel('fileDetails', false);
     $(".exportMenu").show();
+    $('#fileResultModal').modal('hide');
 
 
 }

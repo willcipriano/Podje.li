@@ -383,7 +383,7 @@
                 <i>How would you like them?</i>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info" onclick="showUrlFileSaveModal()">Save</button>
+                <button type="button" class="btn btn-info" onclick="showExportMenu()">Save</button>
                 <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
                 <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
             </div>
@@ -447,7 +447,7 @@
 <div class="exportMenu">
 <form id="exportPane">
 
-    <h2 class="text-center">Export URL's</h2>
+    <h2 class="text-center" id="exportHeader"></h2>
 
     <div class="exportHeader">
     <div class="form-group text-center">
