@@ -317,7 +317,10 @@ function showUrlFileSaveModal() {
 
 function showExportMenu() {
 
+    $('#exportType').select2();
+
     flipPanel("fileSelectorPane", false);
+
     $(".exportMenu").show();
 
 

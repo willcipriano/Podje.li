@@ -14,6 +14,8 @@
           rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/css/fileinput.min.css" media="all"
           rel="stylesheet" type="text/css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css" media="all"
+          rel="stylesheet" type="text/css"/>
     <link href="style.css" media="all"
           rel="stylesheet" type="text/css"/>
 </head>
@@ -449,15 +451,20 @@
 
     <div class="exportHeader">
     <div class="form-group text-center">
-        <label for="exportType">Export URL's as:</label>
-        <br>
-        <select class="selectpicker" id="exportType">
-            <option>CSV</option>
-            <option>HTML</option>
+        <h6>What format should the urls be exported to?</h6>
+
+        <select id="exportType" name="exportTypes[]" multiple="multiple">
+            <option value=".md">.md - markdown</option>
+            <option value="txt-bb">.txt - bb code</option>
+            <option value="txt-plain">.txt - plain text</option>
+            <option value="csv">.csv - comma Separated Values</option>
+            <option value="csv">.html - hypertext markup language</option>
         </select>
+
+
     </div>
 
-        <h5>How would you like those url's prepared?</h5>
+        <h6 class="text-center">How would you like those url's delivered?</h6>
 
         <div id="outputTypesContainer" class="container-fluid">
 
@@ -520,6 +527,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/base64-string.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/theaterjs@3.2.0/dist/theater.min.js"></script>
 <script src="js/debug.js"></script>
 <script src="js/fileShare.js"></script>
