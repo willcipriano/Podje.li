@@ -461,9 +461,7 @@
             <option value="csv">.html - hypertext markup language</option>
         </select>
 
-
     </div>
-
         <h6 class="text-center">How would you like those url's delivered?</h6>
 
         <div id="outputTypesContainer" class="container-fluid">
@@ -473,16 +471,16 @@
                 <div class="col text-center">
 
         <span class="btn-group" data-toggle="buttons">
-            <label class="btn btn-primary active" id="outputTypesSaveButton">
+            <label class="btn btn-info active" id="outputTypesSaveButton">
                 <input type="checkbox" id="outputTypesSave" onclick="outputTypeButton('save')" checked> Save to
                 Disk
             </label>
-            <label class="btn btn-primary" id="outputTypesCompressButton">
+            <label class="btn btn-info" id="outputTypesCompressButton">
                 <input type="checkbox" id="outputTypesCompress" onclick="outputTypeButton('compress')"> Compress Results
             </label>
         </span>
         <span class="btn-group copyUrlsToClipboardSpan" data-toggle="buttons">
-            <label class="btn btn-primary active copyUrlsToClipboardButton" id="outputTypesCopyButton">
+            <label class="btn btn-info copyUrlsToClipboardButton" id="outputTypesCopyButton">
                 <input type="checkbox" id="outputTypesCopy" onclick="outputTypeButton('copy')"> Copy to Clipboard
             </label>
         </span>
@@ -491,7 +489,9 @@
         </div>
         </div>
 
-    <div class="ExportBody"></div>
+        <div class="ExportBody text-center">
+            <button class="btn btn-primary" data-dismiss="modal" type="button">Export & Download</button>
+        </div>
 
 
     <div class="ExportFooter"></div>
