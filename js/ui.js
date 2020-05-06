@@ -324,7 +324,17 @@ function showExportMenu() {
     flipPanel('fileDetails', false);
     $(".exportMenu").show();
     $('#fileResultModal').modal('hide');
+}
 
+function exportResultsButton() {
+    const exportTypes = $('#exportType').select2('data');
+
+    switch (exportTypes[0].id) {
+
+        case 'html':
+            encodeUrls(basicHTMLEncoder, '.html', [], 'saveAsTextFile');
+            
+    }
 
 }
 

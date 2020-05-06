@@ -76,6 +76,7 @@ function encodeUrls(encoder, fileExtension, options = [],
     returnUrls(encoder(encodeReq), encodeReq);
 }
 
+
 function returnUrls(text, encodeReq) {
     if (encodeReq.outputType === "saveAsTextFile") {
         saveAsTextFile(text, encodeReq);

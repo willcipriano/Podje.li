@@ -454,11 +454,11 @@
         <h6>What format should the urls be exported to?</h6>
 
         <select id="exportType" name="exportTypes[]" multiple="multiple">
-            <option value=".md">.md - markdown</option>
+            <option value="md">.md - markdown</option>
             <option value="txt-bb">.txt - bb code</option>
             <option value="txt-plain">.txt - plain text</option>
             <option value="csv">.csv - comma Separated Values</option>
-            <option value="csv">.html - hypertext markup language</option>
+            <option value="html">.html - hypertext markup language</option>
         </select>
 
     </div>
@@ -490,7 +490,8 @@
         </div>
 
         <div class="ExportBody text-center">
-            <button class="btn btn-primary" data-dismiss="modal" type="button">Export & Download</button>
+            <button class="btn btn-primary" data-dismiss="modal" type="button" onclick="exportResultsButton()">Export
+                & Download</button>
         </div>
 
 
