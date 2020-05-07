@@ -326,14 +326,44 @@ function showExportMenu() {
     $('#fileResultModal').modal('hide');
 }
 
+function startSingleExport(exportType, fileExt, options, outputType, compressed = false) {
+    let exportOptions = [];
+
+    console.log(exportType);
+
+    if (compressed) {
+        exportOptions['compressed'] = true;
+    }
+
+    switch (exportType) {
+
+        case '.html':
+            encodeUrls(basicHTMLEncoder, '.html', exportOptions, outputType);
+            break;
+
+        case '.csv':
+            encodeUrls(basicCSVEncoder, '.csv', exportOptions, outputType);
+            break;
+
+        default:
+            console.log("not implemented")
+
+    }
+
+}
+
 function exportResultsButton() {
     const exportTypes = $('#exportType').select2('data');
+    const compressionEnabled = $('#outputTypesCompress').is(':checked');
+    const outputTypeCopy = $('#outputTypesCopy').is(':checked');
+    let outputType = "saveAsTextFile";
 
-    switch (exportTypes[0].id) {
+    if (outputTypeCopy) {
+        outputType = "clipboard";
+    }
 
-        case 'html':
-            encodeUrls(basicHTMLEncoder, '.html', [], 'saveAsTextFile');
-            
+    if (exportTypes.length === 1) {
+        startSingleExport(exportTypes[0].id, exportTypes[0].id, [], outputType, compressionEnabled)
     }
 
 }
