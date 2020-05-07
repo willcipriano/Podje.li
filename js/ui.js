@@ -370,26 +370,34 @@ function exportResultsButton() {
 
 function outputTypeButton(action) {
     const saveCheckbox = $("#outputTypesSave");
-    const saveButton = $("#outputTypesSaveButton");
     const compressCheckbox = $("#outputTypesCompress");
     const compressButton = $("#outputTypesCompressButton");
     const copyCheckbox = $("#outputTypesCopy");
-    const copyButton= $("#outputTypesCopyButton");
+    const exportButton = $("#exportAndButton");
 
-    if (action == 'save') {
+    if (action === 'save') {
+        exportButton.prop('disabled', false);
         compressCheckbox.prop('disabled', false);
         compressButton.prop('disabled', false);
         copyCheckbox.prop('checked', false);
+        exportButton.text('Export & Download');
     }
 
-    if (action == 'copy') {
+    if (action === 'copy') {
+        exportButton.prop('disabled', false);
         compressCheckbox.prop('disabled', true);
         compressButton.prop('disabled', true);
         saveCheckbox.prop('checked', false);
+        exportButton.text('Export & Copy');
+    }
+
+    if (!saveCheckbox.is(':checked') && !copyCheckbox.is(':checked')) {
+        exportButton.prop('disabled', true);
+        console.log("here");
     }
 
 
-}
+        }
 
 
 $(document).ready(function () {
