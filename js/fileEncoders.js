@@ -34,11 +34,11 @@ function basicHTMLEncoder(encodeReq) {
 
 
 function basicMarkdownEncoder(encodeReq) {
-    let markdown = '#' + encodeReq.fileName + '\n';
+    let markdown = '# podje.li file:' + encodeReq.fileName + '\n';
     let x;
 
     for (x = 0; x < encodeReq.urls.length; x++) {
-        markdown += "[Part " + (x + 1) + "](" + encodeReq.urls[x] + ")\n"
+        markdown += "* [Part " + (x + 1) + "](" + encodeReq.urls[x] + ")\n"
     }
     return markdown;
 }
@@ -110,7 +110,16 @@ function saveAsTextFile(text, encodeReq) {
     let blob = new Blob([text], {
         type: "text/plain;charset=utf-8"
     });
-    saveAs(blob, encodeReq.fileName + encodeReq.fileExtension);
+    if (encodeReq.options.includes('compressed')) {
+        let zip = new JSZip();
+        zip.file(encodeReq.fileName + encodeReq.fileExtension, text);
+        zip.generateAsync({type:"blob"})
+            .then(function(content) {
+                saveAs(content, encodeReq.fileName + encodeReq.fileExtension + '.zip');
+            });
+    }
+    else {
+    saveAs(blob, encodeReq.fileName + encodeReq.fileExtension); }
 }
 
 

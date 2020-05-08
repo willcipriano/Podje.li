@@ -327,9 +327,11 @@ function showExportMenu() {
 
 function startSingleExport(exportType, fileExt, options, outputType, compressed = false) {
     let exportOptions = [];
+    exportOptions.push("csvHeader");
+    exportOptions.push("csvLineNumbers");
 
     if (compressed) {
-        exportOptions['compressed'] = true;
+        exportOptions.push('compressed');
     }
 
     switch (exportType) {
