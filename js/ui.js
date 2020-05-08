@@ -312,8 +312,6 @@ function showUrlFileSaveModal() {
     $('#urlFileSaveModalMessage').html("You have <i>" + getShareUrlsLength() + "</i> URL's to store, how should I format them?");
     $("#fileResultModal").modal('hide');
     $("#urlFileSaveModal").modal('show');
-    
-
 }
 
 function showExportMenu() {
@@ -342,6 +340,14 @@ function startSingleExport(exportType, fileExt, options, outputType, compressed 
 
         case '.csv':
             encodeUrls(basicCSVEncoder, '.csv', exportOptions, outputType);
+            break;
+
+        case '.md':
+            encodeUrls(basicMarkdownEncoder, '.md', exportOptions, outputType);
+            break;
+
+        case '.txt':
+            encodeUrls(basicTextEncoder, '.txt', exportOptions, outputType);
             break;
 
         default:

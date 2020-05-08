@@ -11,19 +11,39 @@ class encodeRequest {
 }
 
 
-function basicHTMLEncoder(encodeReq) {
-    setDebugStatus('basicHtmlEncoder start');
-    let html = '<p>' + encodeReq.fileName + '</p>';
+function basicTextEncoder(encodeReq) {
+    let txt = "podje.li file: " + encodeReq.fileName + '\n';
     let x;
 
     for (x = 0; x < encodeReq.urls.length; x++) {
-        html += "<p><a href='" + encodeReq.urls[x] + "'>Part " + x + "</a></p>\n";
+        txt += "Part " + (x + 1) + ": " + encodeReq.urls[x] + "\n"
+    }
+    return txt;
+}
+
+
+function basicHTMLEncoder(encodeReq) {
+    let html = '<h2>podje.li file:' + encodeReq.fileName + '</h2>\n';
+    let x;
+
+    for (x = 0; x < encodeReq.urls.length; x++) {
+        html += "<p><a href='" + encodeReq.urls[x] + "'>Part " + (x + 1) + "</a></p>\n";
     }
     return html;
 }
 
+
+function basicMarkdownEncoder(encodeReq) {
+    let markdown = '#' + encodeReq.fileName + '\n';
+    let x;
+
+    for (x = 0; x < encodeReq.urls.length; x++) {
+        markdown += "[Part " + (x + 1) + "](" + encodeReq.urls[x] + ")\n"
+    }
+    return markdown;
+}
+
 function basicCSVEncoder(encodeReq) {
-    setDebugStatus('basicCSVEncoder start');
     let csv = "";
     let x;
     const quoteUrl = encodeReq.options.includes('csvQuoteURL');
@@ -70,7 +90,6 @@ function basicCSVEncoder(encodeReq) {
 
 function encodeUrls(encoder, fileExtension, options = [],
                     outputType = "clipboard") {
-    setDebugStatus('Starting encoder');
     const encodeReq = new encodeRequest(getFileName(),
         fileExtension, getUrls(), options, outputType);
     returnUrls(encoder(encodeReq), encodeReq);
@@ -88,16 +107,14 @@ function returnUrls(text, encodeReq) {
 
 
 function saveAsTextFile(text, encodeReq) {
-    setDebugStatus("Saving as text");
     let blob = new Blob([text], {
         type: "text/plain;charset=utf-8"
     });
-    saveAs(blob, encodeReq.fileName + '.' + encodeReq.fileExtension);
+    saveAs(blob, encodeReq.fileName + encodeReq.fileExtension);
 }
 
 
 function copyToClipboard(text, encodeReq) {
-    setDebugStatus("Coping to clipboard");
     navigator.clipboard.writeText(text)
         .then(() => toast(encodeReq.fileName + " copied to your clipboard successfully."));
 }
