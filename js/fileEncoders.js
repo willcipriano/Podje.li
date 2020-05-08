@@ -113,7 +113,12 @@ function saveAsTextFile(text, encodeReq) {
     if (encodeReq.options.includes('compressed')) {
         let zip = new JSZip();
         zip.file(encodeReq.fileName + encodeReq.fileExtension, text);
-        zip.generateAsync({type:"blob"})
+        zip.generateAsync({
+            type:"blob",
+            compression: "DEFLATE",
+            compressionOptions: {
+                level: 9
+            }})
             .then(function(content) {
                 saveAs(content, encodeReq.fileName + encodeReq.fileExtension + '.zip');
             });
