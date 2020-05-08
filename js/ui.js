@@ -324,12 +324,11 @@ function showExportMenu() {
     flipPanel('fileDetails', false);
     $(".exportMenu").show();
     $('#fileResultModal').modal('hide');
+    multiFileUrlModal.modal('hide');
 }
 
 function startSingleExport(exportType, fileExt, options, outputType, compressed = false) {
     let exportOptions = [];
-
-    console.log(exportType);
 
     if (compressed) {
         exportOptions['compressed'] = true;
@@ -393,7 +392,6 @@ function outputTypeButton(action) {
 
     if (!saveCheckbox.is(':checked') && !copyCheckbox.is(':checked')) {
         exportButton.prop('disabled', true);
-        console.log("here");
     }
 
 
