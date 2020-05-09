@@ -352,6 +352,10 @@ function startSingleExport(exportType, fileExt, options, outputType, compressed 
             encodeUrls(basicTextEncoder, '.txt', exportOptions, outputType);
             break;
 
+        case '.flat':
+            encodeUrls(basicFlatFileEncoder, '.flat', exportOptions, outputType);
+            break;
+
         default:
             console.log("not implemented")
 
