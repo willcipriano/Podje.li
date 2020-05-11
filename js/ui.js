@@ -156,7 +156,6 @@ function addMultiUrl(urls, page) {
             }
         }
 
-
         if (page !== 1) {
             if (multiFileUrlPrev.is(":hidden")) {
             multiFileUrlPrev.show(); }

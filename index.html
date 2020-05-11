@@ -22,6 +22,8 @@
 
 <body>
 
+<div class="container-fluid" id="outerContainer">
+
 <noscript>
     <div class="container">
         <div class="jumbotron">
@@ -31,13 +33,9 @@
     </div>
 </noscript>
 
-<div class="container" id="pageContainer">
 
-<div class="container">
-    <div class="text-center">
-        <img alt="PODJE.LI" class="center-block img-responsive" src="logo.png" id="logo" style="width: 100%; height:
-        auto;">
-    </div>
+<div class="container-fluid" id="logoContainer">
+        <img alt="PODJE.LI" src="logo.png" id="logo">
 </div>
 
 <div class="container" id="fileSelectorContainer">
@@ -65,7 +63,6 @@
     </div>
 
 </div>
-
 
 <div class="container">
 
@@ -495,21 +492,20 @@
                     id="exportAndButton" onclick="exportResultsButton()">Export
                 & Download</button>
         </div>
+    </div>
+</form>
 
 
     <div class="ExportFooter"></div>
 
 
-</form>
 </div>
-</div>
+
 
 
 <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
-    <!-- Position it -->
     <div style="position: absolute; top: 0; right: 0;">
 
-        <!-- Then put toasts within -->
         <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <img src="icons/help-icon.png" class="rounded mr-2" alt="...">
@@ -519,6 +515,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 </body>

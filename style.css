@@ -94,7 +94,28 @@
 #fileSelectorContainer {
     position: absolute;
     align-content: center;
+    width: 100%;
 }
+
+#pageContainer {
+    background-color: black;
+    position: absolute;
+}
+
+#logoContainer img {
+    width: 100%;
+    height: auto;
+    max-width: 1243px;
+    display:block;
+    margin:auto;
+}
+
+html, body{
+    margin:0;
+    padding:0;
+}
+
+
 
 
 .exportMenu {
