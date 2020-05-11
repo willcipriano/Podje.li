@@ -62,17 +62,6 @@
     display: none;
 }
 
-.exportMenu {
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
-    position: absolute;
-    display: none;
-}
-
-#aboutButton{
-    z-index: 99;
-}
-
 #outputTypesContainer {
     width: 400px;
 }
@@ -83,25 +72,6 @@
     top: -9px;
 }
 
-#copyUrlsToClipboardButton {
-    margin-top: 0;
-}
-
-#exportType {
-    width: 300px;
-}
-
-#fileSelectorContainer {
-    position: absolute;
-    align-content: center;
-    width: 100%;
-}
-
-#pageContainer {
-    background-color: black;
-    position: absolute;
-}
-
 #logoContainer img {
     width: 100%;
     height: auto;
@@ -110,119 +80,20 @@
     margin:auto;
 }
 
-html, body{
-    margin:0;
-    padding:0;
-}
-
-
-
-
 .exportMenu {
     position: relative;
-    bottom: -150px;
+    bottom: -75px;
     width: 100%;
     left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    display: none;
 }
 
-
-@media (min-width:355px) {
-    .exportMenu {
-        position: relative;
-        bottom: -125px;
-        width: 100%;
-        left: 50%;
-    }
+#copyUrlsToClipboardButton {
+    margin-top: 0;
 }
 
-
-
-@media (min-width:444px) {
-    .exportMenu {
-        position: relative;
-        bottom: -100px;
-        width: 100%;
-        left: 50%;
-    }
+#exportType {
+    width: 300px;
 }
-
-
-@media (min-width:528px) {
-    .exportMenu {
-        position: relative;
-        bottom: -70px;
-        width: 100%;
-        left: 50%;
-    }
-
-
-}
-
-@media (min-width:540px) {
-
-    .exportMenu {
-        position: relative;
-        bottom: -70px;
-        width: 100%;
-        left: 50%;
-    }
-}
-
-
-
-@media (min-width:768px) {
-
-    .exportMenu {
-        position: relative;
-        bottom: -55px;
-        width: 100%;
-        left: 50%;
-    }
-}
-
-
-@media (min-width:1200px) {
-
-.exportMenu {
-    position: relative;
-    bottom: -25px;
-    width: 100%;
-    left: 50%;
-} }
-
-
-
-
-
-
-
-/*@media (min-width:320px)  { !* smartphones, iPhone, portrait 480x320 phones *! }*/
-/*@media (min-width:481px)  { !* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. *! }*/
-/*@media (min-width:641px)  { !* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones *! }*/
-/*@media (min-width:961px)  { !* tablet, landscape iPad, lo-res laptops ands desktops *! }*/
-/*@media (min-width:1025px) {*/
-/*    !* big landscape tablets, laptops, and desktops *!*/
-/*    #fileUpload {*/
-/*        position: relative;*/
-/*        top: -70px;*/
-/*    }*/
-
-/*    .exportMenu {*/
-/*        top: 50%;*/
-/*        left: 50%;*/
-/*    }*/
-/*}*/
-
-
-/*@media (min-width:1281px) {*/
-/*    !* hi-res laptops and desktops *!*/
-/*    #fileUpload {*/
-/*        position: relative;*/
-/*        top: -70px;*/
-/*    }*/
-
-/*    .exportMenu {*/
-/*        top: 50%;*/
-/*        left: 50%;*/
-/*    }*/
-/*}*/
