@@ -81,13 +81,15 @@
 }
 
 .exportMenu {
-    position: relative;
-    bottom: -75px;
     width: 100%;
     left: 50%;
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
     display: none;
+}
+
+#outerContainer {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
 }
 
 #copyUrlsToClipboardButton {
