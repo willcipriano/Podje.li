@@ -67,14 +67,10 @@
     color: white !important;
 }
 
-#outputTypesContainer {
-    width: 400px;
-}
+#copyUrlsToClipboardSpan {
+    background-color: black;
+    margin-top: 0px;
 
-.copyUrlsToClipboardSpan {
-    margin-top: 0;
-    position:relative;
-    top: -9px;
 }
 
 #logoContainer img {
@@ -98,21 +94,10 @@
     overflow: hidden;
 }
 
-#copyUrlsToClipboardButton {
-    margin-top: 0;
-}
-
 #exportType {
     width: 320px;
 }
 
 .exportButtonInactive {
     background-color: antiquewhite;
-}
-
-@media only screen and (max-width: 400px) {
-    #outputTypesContainer {
-        width: 200px;
-    }
-
 }

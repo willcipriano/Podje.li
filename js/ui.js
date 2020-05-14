@@ -399,9 +399,11 @@ function outputTypeButton(action) {
     if (action === 'copy') {
         exportButton.prop('disabled', false);
         compressCheckbox.prop('disabled', true);
+        compressCheckbox.prop('checked', false);
         compressButton.prop('disabled', true);
         saveCheckbox.prop('checked', false);
         saveButton.removeClass('active');
+        compressButton.removeClass('active');
         exportButton.text('Export & Copy');
     }
 

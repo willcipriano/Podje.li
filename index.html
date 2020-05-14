@@ -84,41 +84,30 @@
 
                 <h4 class="text-center lead">How would you like those urls delivered?</h4>
 
-                <div id="outputTypesContainer" class="container-fluid text-center">
-
+            <div id="outputTypesContainer" class="container-fluid text-center">
 
         <span class="btn-group" data-toggle="buttons">
             <label class="btn btn-outline-success active" id="outputTypesSaveButton">
                 <input type="checkbox" id="outputTypesSave" onclick="outputTypeButton('save')"
-                       checked>
-                Save to
-                Disk
+                       checked>Download
             </label>
             <label class="btn btn-outline-success"  id="outputTypesCompressButton">
-                <input type="checkbox"  id="outputTypesCompress" onclick="outputTypeButton('compress')"> Compress
-                Results
+                <input type="checkbox"  id="outputTypesCompress" onclick="outputTypeButton('compress')">Compress
             </label>
         </span>
-                            <span class="btn-group copyUrlsToClipboardSpan " data-toggle="buttons">
+                    <span class="btn-group" data-toggle="buttons">
             <label class="btn btn-outline-success copyUrlsToClipboardButton" id="outputTypesCopyButton">
-                <input type="checkbox" id="outputTypesCopy" onclick="outputTypeButton('copy')"> Copy to Clipboard
+                <input type="checkbox" id="outputTypesCopy" onclick="outputTypeButton('copy')">Copy To Clipboard
             </label>
         </span>
-
-                    </div>
-
+            </div>
                 <div class="ExportBody text-center">
-                    <button class="btn btn-success" data-dismiss="modal" type="button"
+                    <button class="btn btn-success outputButton" data-dismiss="modal" type="button"
                             id="exportAndButton" onclick="exportResultsButton()">Export
                         & Download</button>
                 </div>
-            </div>
         </form>
-
-
         <div class="ExportFooter"></div>
-
-
     </div>
 
 <div class="container">
