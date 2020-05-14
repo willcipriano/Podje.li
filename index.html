@@ -67,13 +67,11 @@
     <div class="exportMenu">
         <form id="exportPane">
 
-            <h2 class="text-center" id="exportHeader"></h2>
+            <h2 class="text-center display-4" id="exportHeader"></h2>
 
-            <div class="exportHeader">
-                <div class="form-group text-center">
-                    <h6>What format should the urls be exported to?</h6>
+            <h4 class="text-center lead">What format should the urls be exported to?</h4>
 
-                    <select id="exportType" name="exportTypes[]" multiple="multiple">
+                    <select id="exportType" class="text-center" name="exportTypes[]" multiple="multiple">
                         <option value=".md">.md - markdown</option>
                         <option value=".txt">.txt - plain text</option>
                         <option value=".csv">.csv - comma Separated Values</option>
@@ -81,26 +79,25 @@
                         <option value=".flat">.flat - fixed width</option>
                     </select>
 
-                </div>
-                <h6 class="text-center">How would you like those urls delivered?</h6>
+                <h4 class="text-center lead">How would you like those urls delivered?</h4>
 
                 <div id="outputTypesContainer" class="container-fluid text-center">
 
 
         <span class="btn-group" data-toggle="buttons">
-            <label class="btn btn-success active" id="outputTypesSaveButton">
+            <label class="btn btn-outline-success active" id="outputTypesSaveButton">
                 <input type="checkbox" id="outputTypesSave" onclick="outputTypeButton('save')"
                        checked>
                 Save to
                 Disk
             </label>
-            <label class="btn btn-success"  id="outputTypesCompressButton">
+            <label class="btn btn-outline-success"  id="outputTypesCompressButton">
                 <input type="checkbox"  id="outputTypesCompress" onclick="outputTypeButton('compress')"> Compress
                 Results
             </label>
         </span>
                             <span class="btn-group copyUrlsToClipboardSpan " data-toggle="buttons">
-            <label class="btn btn-success copyUrlsToClipboardButton" id="outputTypesCopyButton">
+            <label class="btn btn-outline-success copyUrlsToClipboardButton" id="outputTypesCopyButton">
                 <input type="checkbox" id="outputTypesCopy" onclick="outputTypeButton('copy')"> Copy to Clipboard
             </label>
         </span>
@@ -108,7 +105,7 @@
                     </div>
 
                 <div class="ExportBody text-center">
-                    <button class="btn btn-primary" data-dismiss="modal" type="button"
+                    <button class="btn btn-success" data-dismiss="modal" type="button"
                             id="exportAndButton" onclick="exportResultsButton()">Export
                         & Download</button>
                 </div>

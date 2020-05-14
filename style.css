@@ -102,5 +102,16 @@
 }
 
 #exportType {
-    width: 300px;
+    width: 320px;
+}
+
+.exportButtonInactive {
+    background-color: antiquewhite;
+}
+
+@media only screen and (max-width: 400px) {
+    #outputTypesContainer {
+        width: 200px;
+    }
+
 }

@@ -383,6 +383,7 @@ function outputTypeButton(action) {
     const compressCheckbox = $("#outputTypesCompress");
     const compressButton = $("#outputTypesCompressButton");
     const copyCheckbox = $("#outputTypesCopy");
+    const copyButton = $("#outputTypesCopyButton");
     const exportButton = $("#exportAndButton");
 
     if (action === 'save') {
@@ -390,6 +391,7 @@ function outputTypeButton(action) {
         compressCheckbox.prop('disabled', false);
         compressButton.prop('disabled', false);
         copyCheckbox.prop('checked', false);
+        copyButton.removeClass('active');
         exportButton.text('Export & Download');
     }
 
