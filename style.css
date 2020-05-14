@@ -62,6 +62,10 @@
     display: none;
 }
 
+.select2-selection__choice {
+    background-color: #3bb54a !important;
+}
+
 #outputTypesContainer {
     width: 400px;
 }
