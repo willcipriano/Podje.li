@@ -64,6 +64,7 @@
 
 .select2-selection__choice {
     background-color: #3bb54a !important;
+    color: white !important;
 }
 
 #outputTypesContainer {
