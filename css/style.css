@@ -101,3 +101,52 @@
 .exportButtonInactive {
     background-color: antiquewhite;
 }
+
+
+#progressBarContainer {
+    max-width: 500px;
+    display: none;
+}
+
+.progress {
+    height: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #B4BAD2;
+    border: solid 2px #B4BAD2;
+    overflow: visible;
+}
+.progress-bar {
+    background-color: #3bb54a;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    text-align: right;
+    border-radius: 10px;
+    position: relative;
+}
+.progress-bar::before {
+    content: attr(aria-valuenow);
+    top: -40px;
+    padding: 5px;
+    background-color: #686E85;
+    border: solid 2px #B4BAD2;
+    border-radius: 10px;
+    position: absolute;
+    width: 60px;
+    z-index: 1;
+    color: #B4BAD2;
+    margin-left: -30px;
+    text-align: center;
+}
+.progress-bar::after {
+    top: -14px;
+    height: 10px;
+    width: 14px;
+    background-color: #B4BAD2;
+    position: absolute;
+    content: " ";
+    z-index: 0;
+    transform: rotate(45deg);
+    margin-left: -8px;
+}

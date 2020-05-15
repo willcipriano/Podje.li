@@ -4,6 +4,7 @@ const multiFileUrlNext = $("#multiFileUrlNext");
 const multiFileUrlPrev = $("#multiFileUrlPrev");
 const multiFileSelectElements = {};
 const multiFileSelectCopyButtonElements = {};
+let exportProgressPercentage = 0;
 let multiUrlCurrentPage = 1;
 
 function populateFileDetails(file) {
@@ -315,7 +316,7 @@ function showUrlFileSaveModal() {
 
 function showExportMenu() {
 
-    $('#exportType').select2();
+    $('#exportType').select2({ tags: false, minimumResultsForSearch: Infinity });
     $('#exportHeader').text("We have " + getShareUrlsLength() + " urls for you!");
     flipPanel("fileSelectorPane", false);
     flipPanel('fileDetails', false);
@@ -362,7 +363,33 @@ function startSingleExport(exportType, fileExt, options, outputType, compressed 
 
 }
 
+function setExportProgress(exportProgress) {
+    exportProgressPercentage = exportProgress;
+    const progressBar = $("#progressBarContainer");
+    const progressStatus = $("#exportStatus");
+    const exportButton = $("#exportAndButton");
+    progressBar.css('width', exportProgress + '%');
+
+    if (exportProgress === 0) {
+        progressStatus.text("Initializing export.");
+        progressBar.show();
+        exportButton.prop('disabled', true);
+    }
+
+    if (exportProgress === 100) {
+        progressStatus.text("Export complete.");
+        progressBar.fadeOut(1000, cleanUpProgressBar);
+        exportButton.prop('disabled', false);
+    }
+}
+
+function cleanUpProgressBar() {
+    $("#progressBarContainer").hide();
+}
+
+
 function exportResultsButton() {
+    setExportProgress(0);
     const exportTypes = $('#exportType').select2('data');
     const compressionEnabled = $('#outputTypesCompress').is(':checked');
     const outputTypeCopy = $('#outputTypesCopy').is(':checked');
@@ -373,9 +400,9 @@ function exportResultsButton() {
     }
 
     if (exportTypes.length === 1) {
+        setExportProgress(1);
         startSingleExport(exportTypes[0].id, exportTypes[0].id, [], outputType, compressionEnabled)
     }
-
 }
 
 function outputTypeButton(action) {
@@ -394,6 +421,7 @@ function outputTypeButton(action) {
         copyCheckbox.prop('checked', false);
         copyButton.removeClass('active');
         exportButton.text('Export & Download');
+        exportButton.prop('disabled', false);
     }
 
     if (action === 'copy') {
@@ -405,6 +433,7 @@ function outputTypeButton(action) {
         saveButton.removeClass('active');
         compressButton.removeClass('active');
         exportButton.text('Export & Copy');
+        exportButton.prop('disabled', false);
     }
 
     if (!saveCheckbox.is(':checked') && !copyCheckbox.is(':checked')) {
@@ -416,7 +445,6 @@ function outputTypeButton(action) {
 
 
 $(document).ready(function () {
-    setDebugMessage("Starting ui.js initialization");
     let placeholderText;
     let fileSelector = $("#fileSelector");
 
@@ -454,11 +482,7 @@ $(document).ready(function () {
     fileSelector.on('change', newFileDetected);
     fileSelector.on('fileclear', cancelDetected);
 
-    setDebugMessage("Showing file selector pane");
     flipPanel("fileSelectorPane");
 
     handleMultiPartProcess();
-
-    setDebugMessage("ui.js initialization completed");
-    setDebugStatus("UI initialization completed");
 });

@@ -16,7 +16,9 @@
           rel="stylesheet" type="text/css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css" media="all"
           rel="stylesheet" type="text/css"/>
-    <link href="style.css" media="all"
+    <link href="css/select2-bootstrap.min.css" media="all"
+          rel="stylesheet" type="text/css"/>
+    <link href="css/style.css" media="all"
           rel="stylesheet" type="text/css"/>
 </head>
 
@@ -64,16 +66,16 @@
 
 </div>
 
-    <div class="exportMenu">
+    <div class="exportMenu text">
         <form id="exportPane">
 
-            <h2 class="text-center display-4" id="exportHeader"></h2>
+            <h3 class="text-center text-success" id="exportHeader"></h3>
 
-            <h4 class="text-center lead">What format should the urls be exported to?</h4>
+            <h1 class="text-center lead">What format should the urls be exported to?</h1>
 
             <div class="text-center">
             <label for="exportType"></label>
-                    <select id="exportType" class="text-center" name="exportTypes[]" multiple="multiple">
+                    <select id="exportType" name="exportTypes[]">
                         <option value=".md">.md - markdown</option>
                         <option value=".txt">.txt - plain text</option>
                         <option value=".csv">.csv - comma separated values</option>
@@ -82,32 +84,40 @@
                     </select>
             </div>
 
-                <h4 class="text-center lead">How would you like those urls delivered?</h4>
+                <h1 class="text-center lead">How would you like those urls delivered?</h1>
 
             <div id="outputTypesContainer" class="container-fluid text-center">
 
         <span class="btn-group" data-toggle="buttons">
-            <label class="btn btn-outline-success active" id="outputTypesSaveButton">
-                <input type="checkbox" id="outputTypesSave" onclick="outputTypeButton('save')"
-                       checked>Download
+            <label class="btn btn-outline-success" id="outputTypesSaveButton">
+                <input type="checkbox" id="outputTypesSave" onclick="outputTypeButton('save')">Download
             </label>
             <label class="btn btn-outline-success"  id="outputTypesCompressButton">
                 <input type="checkbox"  id="outputTypesCompress" onclick="outputTypeButton('compress')">Compress
             </label>
         </span>
-                    <span class="btn-group" data-toggle="buttons">
+
+        <span class="btn-group" data-toggle="buttons">
             <label class="btn btn-outline-success copyUrlsToClipboardButton" id="outputTypesCopyButton">
                 <input type="checkbox" id="outputTypesCopy" onclick="outputTypeButton('copy')">Copy To Clipboard
             </label>
         </span>
-            </div>
                 <div class="ExportBody text-center">
                     <button class="btn btn-success outputButton" data-dismiss="modal" type="button"
-                            id="exportAndButton" onclick="exportResultsButton()">Export
+                            id="exportAndButton" disabled onclick="exportResultsButton()">Export
                         & Download</button>
                 </div>
+            </div>
         </form>
-        <div class="ExportFooter"></div>
+
+        <div id="progressBarContainer" class="container-fluid text-center">
+
+        <div class="progress" id="exportProgress">
+            <div class="progress-bar" style="width: 42%" role="progressbar" id="exportProgressBar"></div>
+        </div>
+            <h1 class="text-center lead" id="exportStatus"></h1>
+        </div>
+
     </div>
 
 <div class="container">
@@ -500,6 +510,7 @@
         </div>
     </div>
 </div>
+
 </div>
 
 </body>

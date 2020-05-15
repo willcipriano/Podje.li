@@ -101,11 +101,13 @@ function encodeUrls(encoder, fileExtension, options = [],
                     outputType = "clipboard") {
     const encodeReq = new encodeRequest(getFileName(),
         fileExtension, getUrls(), options, outputType);
+    setExportProgress(25);
     returnUrls(encoder(encodeReq), encodeReq);
 }
 
 
 function returnUrls(text, encodeReq) {
+    setExportProgress(42);
     if (encodeReq.outputType === "saveAsTextFile") {
         saveAsTextFile(text, encodeReq);
     }
@@ -128,17 +130,19 @@ function saveAsTextFile(text, encodeReq) {
             }})
             .then(function(content) {
                 saveAs(content, encodeReq.fileName + encodeReq.fileExtension + '.zip');
-            });
+            }).then(() => setExportProgress(100));
     }
     else {
         let blob = new Blob([text], {
             type: "text/plain;charset=utf-16"
         });
-    saveAs(blob, encodeReq.fileName + encodeReq.fileExtension); }
+    saveAs(blob, encodeReq.fileName + encodeReq.fileExtension);
+        setExportProgress(100); }
 }
 
 
 function copyToClipboard(text, encodeReq) {
     navigator.clipboard.writeText(text)
         .then(() => toast(encodeReq.fileName + " copied to your clipboard successfully."));
+    setExportProgress(100);
 }
