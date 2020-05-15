@@ -365,20 +365,22 @@ function startSingleExport(exportType, fileExt, options, outputType, compressed 
 
 function setExportProgress(exportProgress) {
     exportProgressPercentage = exportProgress;
-    const progressBar = $("#progressBarContainer");
+    const progressBarContainer = $("#progressBarContainer");
+    const progressBar = $("#exportProgressBar");
     const progressStatus = $("#exportStatus");
     const exportButton = $("#exportAndButton");
+
     progressBar.css('width', exportProgress + '%');
 
     if (exportProgress === 0) {
-        progressStatus.text("Initializing export.");
-        progressBar.show();
+        progressStatus.text("Exporting urls.");
+        progressBarContainer.show();
         exportButton.prop('disabled', true);
     }
 
     if (exportProgress === 100) {
         progressStatus.text("Export complete.");
-        progressBar.fadeOut(1000, cleanUpProgressBar);
+        progressBarContainer.fadeOut(3000, cleanUpProgressBar);
         exportButton.prop('disabled', false);
     }
 }

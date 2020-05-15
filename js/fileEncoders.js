@@ -122,6 +122,7 @@ function saveAsTextFile(text, encodeReq) {
     if (encodeReq.options.includes('compressed')) {
         let zip = new JSZip();
         zip.file(encodeReq.fileName + encodeReq.fileExtension, text);
+        setExportProgress(52);
         zip.generateAsync({
             type:"blob",
             compression: "DEFLATE",
@@ -136,12 +137,14 @@ function saveAsTextFile(text, encodeReq) {
         let blob = new Blob([text], {
             type: "text/plain;charset=utf-16"
         });
+        setExportProgress(52);
     saveAs(blob, encodeReq.fileName + encodeReq.fileExtension);
         setExportProgress(100); }
 }
 
 
 function copyToClipboard(text, encodeReq) {
+    setExportProgress(52);
     navigator.clipboard.writeText(text)
         .then(() => toast(encodeReq.fileName + " copied to your clipboard successfully."));
     setExportProgress(100);
