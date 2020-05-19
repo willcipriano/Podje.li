@@ -437,6 +437,7 @@
                 <i>How would you like them?</i>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-info" onclick="showUrlFileSaveModal()">Save</button>
                 <button type="button" class="btn btn-info" onclick="showExportMenu()">Save</button>
                 <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
                 <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
@@ -496,6 +497,94 @@
         </div>
     </div>
 </div>
+
+<div aria-hidden="true" class="modal fade" id="urlFileSaveModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="urlFileSaveModalTitle"></h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div id="urlFileSaveModalMessage"></div>
+
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" onclick="downloadAsCsv()">Download as CSV</button>
+                <button type="button" class="btn btn-info" onclick="outputURLS()">Copy as HTML</button>
+                <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div aria-hidden="true" class="modal fade" id="CSVOutputModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="CSVModalTitle"></h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Default checkbox
+                </label>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" onclick="downloadAsCsv()">Download as CSV</button>
+                <button type="button" class="btn btn-info" onclick="copyAsHtml()">Copy as HTML</button>
+                <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="exportMenu">
+<form id="exportPane">
+
+    <h2 class="text-center">Export URL's</h2>
+
+    <div class="exportHeader">
+    <div class="form-group text-center">
+        <label for="exportType">Export URL's as:</label>
+        <br>
+        <select class="selectpicker" id="exportType">
+            <option>CSV</option>
+            <option>HTML</option>
+        </select>
+    </div>
+
+    <div class="form-group text-center">
+        <label for="exportMethod">To my:</label>
+        <br>
+        <select class="selectpicker" id="exportMethod">
+            <option>Clipboard</option>
+            <option>File System</option>
+        </select>
+    </div>
+    </div>
+
+    <div class="ExportBody"></div>
+
+
+    <div class="ExportFooter"></div>
+
+
+</form>
+</div>
+
 
 <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
     <div style="position: absolute; top: 0; right: 0;">

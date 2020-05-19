@@ -92,7 +92,6 @@ function basicCSVEncoder(encodeReq) {
             }
         }
     }
-
     return csv.slice(0, -1);
 }
 

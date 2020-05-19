@@ -1,4 +1,4 @@
-bootstrap.Toast.Default.delay = 5000;
+﻿bootstrap.Toast.Default.delay = 5000;
 const multiFileUrlModal = $("#multiFileUrlModal");
 const multiFileUrlNext = $("#multiFileUrlNext");
 const multiFileUrlPrev = $("#multiFileUrlPrev");
@@ -445,7 +445,6 @@ function outputTypeButton(action) {
         exportButton.prop('disabled', true);
     }
         }
-
 
 $(document).ready(function () {
     let placeholderText;
