@@ -14,11 +14,17 @@
           rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/css/fileinput.min.css" media="all"
           rel="stylesheet" type="text/css"/>
-    <link href="style.css" media="all"
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css" media="all"
+          rel="stylesheet" type="text/css"/>
+    <link href="css/select2-bootstrap.min.css" media="all"
+          rel="stylesheet" type="text/css"/>
+    <link href="css/style.css" media="all"
           rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
+
+<div class="container-fluid" id="outerContainer">
 
 <noscript>
     <div class="container">
@@ -29,13 +35,12 @@
     </div>
 </noscript>
 
-<div class="container">
-    <div class="text-center">
-        <img alt="PODJE.LI" class="center-block img-responsive" src="logo.png" style="width: 100%; height: auto;">
-    </div>
+
+<div class="container-fluid" id="logoContainer">
+        <img alt="PODJE.LI" src="logo.png" id="logo">
 </div>
 
-<div class="container">
+<div class="container" id="fileSelectorContainer">
 
     <div class="row" id="fileUpload">
 
@@ -61,6 +66,59 @@
 
 </div>
 
+    <div class="exportMenu">
+        <form id="exportPane">
+
+            <h3 class="text-center text-success" id="exportHeader"></h3>
+
+            <h1 class="text-center lead">What format should the urls be exported to?</h1>
+
+            <div class="text-center">
+            <label for="exportType"></label>
+                    <select id="exportType" name="exportTypes[]">
+                        <option value=".md">.md - markdown</option>
+                        <option value=".txt">.txt - plain text</option>
+                        <option value=".csv">.csv - comma separated values</option>
+                        <option value=".html">.html - hypertext markup language</option>
+                        <option value=".flat">.flat - fixed width</option>
+                    </select>
+            </div>
+
+                <h1 class="text-center lead">How would you like those urls delivered?</h1>
+
+            <div id="outputTypesContainer" class="container-fluid text-center">
+
+        <span class="btn-group" data-toggle="buttons">
+            <label class="btn btn-outline-success" id="outputTypesSaveButton">
+                <input type="checkbox" id="outputTypesSave" onclick="outputTypeButton('save')">Download
+            </label>
+            <label class="btn btn-outline-success"  id="outputTypesCompressButton">
+                <input type="checkbox"  id="outputTypesCompress" onclick="outputTypeButton('compress')">Compress
+            </label>
+        </span>
+
+        <span class="btn-group" data-toggle="buttons">
+            <label class="btn btn-outline-success copyUrlsToClipboardButton" id="outputTypesCopyButton">
+                <input type="checkbox" id="outputTypesCopy" onclick="outputTypeButton('copy')">Copy To Clipboard
+            </label>
+        </span>
+                <div class="ExportBody text-center">
+                    <button class="btn btn-success outputButton" data-dismiss="modal" type="button"
+                            id="exportAndButton" disabled onclick="exportResultsButton()">Export
+                        & Download</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="progressBarContainer" class="container-fluid text-center">
+
+        <div class="progress" id="exportProgress">
+            <div class="progress-bar" role="progressbar" id="exportProgressBar"></div>
+        </div>
+            <h1 class="text-center lead" id="exportStatus"></h1>
+        </div>
+
+    </div>
 
 <div class="container">
 
@@ -130,7 +188,6 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                <button class="btn btn-primary" type="button">Save changes</button>
             </div>
         </div>
     </div>
@@ -221,11 +278,11 @@
 
             </div>
             <div class="modal-footer">
+                <button class="btn btn-file" type="button" onclick="showExportMenu()">Export</button>
                 <button class="btn btn-secondary" type="button" id="multiFileUrlPrev" onclick="showMultiUrlPrevPage()">
                     Previous</button>
                 <button class="btn btn-secondary" type="button" id="multiFileUrlNext"
                         onclick="showMultiUrlNextPage()">Next</button>
-                <button class="btn btn-primary" type="button">Save changes</button>
             </div>
         </div>
     </div>
@@ -381,6 +438,59 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info" onclick="showUrlFileSaveModal()">Save</button>
+                <button type="button" class="btn btn-info" onclick="showExportMenu()">Save</button>
+                <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div aria-hidden="true" class="modal fade" id="urlFileSaveModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="urlFileSaveModalTitle"></h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div id="urlFileSaveModalMessage"></div>
+
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" onclick="downloadAsCsv()">Download as CSV</button>
+                <button type="button" class="btn btn-info" onclick="outputURLS()">Copy as HTML</button>
+                <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div aria-hidden="true" class="modal fade" id="CSVOutputModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="CSVModalTitle"></h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Default checkbox
+                </label>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" onclick="downloadAsCsv()">Download as CSV</button>
+                <button type="button" class="btn btn-info" onclick="copyAsHtml()">Copy as HTML</button>
                 <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
                 <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
             </div>
@@ -477,10 +587,8 @@
 
 
 <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
-    <!-- Position it -->
     <div style="position: absolute; top: 0; right: 0;">
 
-        <!-- Then put toasts within -->
         <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <img src="icons/help-icon.png" class="rounded mr-2" alt="...">
@@ -490,6 +598,8 @@
             </div>
         </div>
     </div>
+</div>
+
 </div>
 
 </body>
@@ -502,7 +612,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/base64-string.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/theaterjs@3.2.0/dist/theater.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.3.0/jszip.min.js"></script>
 <script src="js/debug.js"></script>
 <script src="js/fileShare.js"></script>
 <script src="js/fileEncoders.js"></script>

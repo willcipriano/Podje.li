@@ -142,7 +142,6 @@ function appendZeros(partNo) {
     }
 
     return partNo;
-
 }
 
 

@@ -11,19 +11,49 @@ class encodeRequest {
 }
 
 
-function basicHTMLEncoder(encodeReq) {
-    setDebugStatus('basicHtmlEncoder start');
-    let html = '<p>' + encodeReq.fileName + '</p>';
+function basicTextEncoder(encodeReq) {
+    let txt = "podje.li file: " + encodeReq.fileName + '\n';
     let x;
 
     for (x = 0; x < encodeReq.urls.length; x++) {
-        html += "<p><a href='" + encodeReq.urls[x] + "'>Part " + x + "</a></p>\n";
+        txt += "Part " + (x + 1) + ": " + encodeReq.urls[x] + "\n"
     }
-    return html;
+    return txt.slice(0, -1);
+}
+
+
+function basicFlatFileEncoder(encodeReq) {
+    let x;
+    let flat = '';
+
+    for (x = 0; x < encodeReq.urls.length; x++) {
+        flat += encodeReq.urls[x] + "\n"
+    }
+    return flat.slice(0, -1);
+}
+
+function basicHTMLEncoder(encodeReq) {
+    let html = '<h2>podje.li file:' + encodeReq.fileName + '</h2>\n';
+    let x;
+
+    for (x = 0; x < encodeReq.urls.length; x++) {
+        html += "<p><a href='" + encodeReq.urls[x] + "'>Part " + (x + 1) + "</a></p>\n";
+    }
+    return html.slice(0, -1);
+}
+
+
+function basicMarkdownEncoder(encodeReq) {
+    let markdown = '# podje.li file:' + encodeReq.fileName + '\n';
+    let x;
+
+    for (x = 0; x < encodeReq.urls.length; x++) {
+        markdown += "* [Part " + (x + 1) + "](" + encodeReq.urls[x] + ")\n"
+    }
+    return markdown.slice(0, -1);
 }
 
 function basicCSVEncoder(encodeReq) {
-    setDebugStatus('basicCSVEncoder start');
     let csv = "";
     let x;
     const quoteUrl = encodeReq.options.includes('csvQuoteURL');
@@ -39,11 +69,10 @@ function basicCSVEncoder(encodeReq) {
         for (x = 0; x < encodeReq.urls.length; x++) {
 
             if (quoteUrl){
-                csv += x + ",'" + encodeReq.urls[x] + "'\n";
+                csv += (x + 1) + ",'" + encodeReq.urls[x] + "'\n";
             }
-
             else {
-                csv += x + ',' + encodeReq.urls[x] + '\n';
+                csv += (x + 1) + ',' + encodeReq.urls[x] + '\n';
             }
 
         }
@@ -63,20 +92,21 @@ function basicCSVEncoder(encodeReq) {
             }
         }
     }
-
-    return csv;
+    return csv.slice(0, -1);
 }
 
 
 function encodeUrls(encoder, fileExtension, options = [],
                     outputType = "clipboard") {
-    setDebugStatus('Starting encoder');
     const encodeReq = new encodeRequest(getFileName(),
         fileExtension, getUrls(), options, outputType);
+    setExportProgress(25);
     returnUrls(encoder(encodeReq), encodeReq);
 }
 
+
 function returnUrls(text, encodeReq) {
+    setExportProgress(42);
     if (encodeReq.outputType === "saveAsTextFile") {
         saveAsTextFile(text, encodeReq);
     }
@@ -87,16 +117,34 @@ function returnUrls(text, encodeReq) {
 
 
 function saveAsTextFile(text, encodeReq) {
-    setDebugStatus("Saving as text");
-    let blob = new Blob([text], {
-        type: "text/plain;charset=utf-8"
-    });
-    saveAs(blob, encodeReq.fileName + '.' + encodeReq.fileExtension);
+
+    if (encodeReq.options.includes('compressed')) {
+        let zip = new JSZip();
+        zip.file(encodeReq.fileName + encodeReq.fileExtension, text);
+        setExportProgress(52);
+        zip.generateAsync({
+            type:"blob",
+            compression: "DEFLATE",
+            compressionOptions: {
+                level: 9
+            }})
+            .then(function(content) {
+                saveAs(content, encodeReq.fileName + encodeReq.fileExtension + '.zip');
+            }).then(() => setExportProgress(100));
+    }
+    else {
+        let blob = new Blob([text], {
+            type: "text/plain;charset=utf-16"
+        });
+        setExportProgress(52);
+    saveAs(blob, encodeReq.fileName + encodeReq.fileExtension);
+        setExportProgress(100); }
 }
 
 
 function copyToClipboard(text, encodeReq) {
-    setDebugStatus("Coping to clipboard");
+    setExportProgress(52);
     navigator.clipboard.writeText(text)
         .then(() => toast(encodeReq.fileName + " copied to your clipboard successfully."));
+    setExportProgress(100);
 }

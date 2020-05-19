@@ -1,9 +1,10 @@
-bootstrap.Toast.Default.delay = 5000;
+﻿bootstrap.Toast.Default.delay = 5000;
 const multiFileUrlModal = $("#multiFileUrlModal");
 const multiFileUrlNext = $("#multiFileUrlNext");
 const multiFileUrlPrev = $("#multiFileUrlPrev");
 const multiFileSelectElements = {};
 const multiFileSelectCopyButtonElements = {};
+let exportProgressPercentage = 0;
 let multiUrlCurrentPage = 1;
 
 function populateFileDetails(file) {
@@ -155,7 +156,6 @@ function addMultiUrl(urls, page) {
                 multiFileUrlNext.hide();
             }
         }
-
 
         if (page !== 1) {
             if (multiFileUrlPrev.is(":hidden")) {
@@ -312,17 +312,141 @@ function showUrlFileSaveModal() {
     $('#urlFileSaveModalMessage').html("You have <i>" + getShareUrlsLength() + "</i> URL's to store, how should I format them?");
     $("#fileResultModal").modal('hide');
     $("#urlFileSaveModal").modal('show');
-
 }
 
 function showExportMenu() {
+
+    $('#exportType').select2({ tags: false, minimumResultsForSearch: Infinity });
+    $('#exportHeader').text("We have " + getShareUrlsLength() + " urls for you!");
     flipPanel("fileSelectorPane", false);
+    flipPanel('fileDetails', false);
     $(".exportMenu").show();
+    $('#fileResultModal').modal('hide');
+    multiFileUrlModal.modal('hide');
+}
+
+function startSingleExport(exportType, fileExt, options, outputType, compressed = false) {
+    let exportOptions = [];
+    exportOptions.push("csvHeader");
+    exportOptions.push("csvLineNumbers");
+
+    if (compressed) {
+        exportOptions.push('compressed');
+    }
+
+    switch (exportType) {
+
+        case '.html':
+            encodeUrls(basicHTMLEncoder, '.html', exportOptions, outputType);
+            break;
+
+        case '.csv':
+            encodeUrls(basicCSVEncoder, '.csv', exportOptions, outputType);
+            break;
+
+        case '.md':
+            encodeUrls(basicMarkdownEncoder, '.md', exportOptions, outputType);
+            break;
+
+        case '.txt':
+            encodeUrls(basicTextEncoder, '.txt', exportOptions, outputType);
+            break;
+
+        case '.flat':
+            encodeUrls(basicFlatFileEncoder, '.flat', exportOptions, outputType);
+            break;
+
+        default:
+            console.log("not implemented")
+
+    }
+
+}
+
+function setExportProgress(exportProgress) {
+    exportProgressPercentage = exportProgress;
+    const progressBarContainer = $("#progressBarContainer");
+    const progressBar = $("#exportProgressBar");
+    const progressStatus = $("#exportStatus");
+    const exportButton = $("#exportAndButton");
+
+    progressBar.css('width', exportProgress + '%');
+
+    if (exportProgress === 0) {
+        $('.progress').removeClass('active');
+        progressStatus.text("Exporting urls.");
+        progressBarContainer.show();
+        exportButton.prop('disabled', true);
+        $('.progress').addClass('active');
+    }
+
+    if (exportProgress === 100) {
+        progressStatus.text("Export complete.");
+        progressBarContainer.fadeOut(3000, cleanUpProgressBar);
+        exportButton.prop('disabled', false);
+    }
+}
+
+function cleanUpProgressBar() {
+    $("#progressBarContainer").hide();
+    progressBar.css('width',  '1%');
 }
 
 
+function exportResultsButton() {
+    setExportProgress(0);
+    const exportTypes = $('#exportType').select2('data');
+    const compressionEnabled = $('#outputTypesCompress').is(':checked');
+    const outputTypeCopy = $('#outputTypesCopy').is(':checked');
+    let outputType = "saveAsTextFile";
+
+    if (outputTypeCopy) {
+        outputType = "clipboard";
+    }
+
+    if (exportTypes.length === 1) {
+        setExportProgress(1);
+        startSingleExport(exportTypes[0].id, exportTypes[0].id, [], outputType, compressionEnabled)
+    }
+}
+
+function outputTypeButton(action) {
+    const saveCheckbox = $("#outputTypesSave");
+    const saveButton = $("#outputTypesSaveButton");
+    const compressCheckbox = $("#outputTypesCompress");
+    const compressButton = $("#outputTypesCompressButton");
+    const copyCheckbox = $("#outputTypesCopy");
+    const copyButton = $("#outputTypesCopyButton");
+    const exportButton = $("#exportAndButton");
+
+    if (action === 'save') {
+        exportButton.prop('disabled', false);
+        compressCheckbox.prop('disabled', false);
+        compressButton.prop('disabled', false);
+        copyCheckbox.prop('checked', false);
+        copyButton.removeClass('active');
+        exportButton.text('Export & Download');
+        exportButton.prop('disabled', false);
+    }
+
+    if (action === 'copy') {
+        exportButton.prop('disabled', false);
+        compressCheckbox.prop('disabled', true);
+        compressCheckbox.prop('checked', false);
+        compressButton.prop('disabled', true);
+        saveCheckbox.prop('checked', false);
+        saveButton.removeClass('active');
+        compressButton.removeClass('active');
+        exportButton.text('Export & Copy');
+        exportButton.prop('disabled', false);
+    }
+
+    if (!saveCheckbox.is(':checked') && !copyCheckbox.is(':checked')) {
+        exportButton.prop('disabled', true);
+    }
+        }
+
 $(document).ready(function () {
-    setDebugMessage("Starting ui.js initialization");
     let placeholderText;
     let fileSelector = $("#fileSelector");
 
@@ -360,11 +484,7 @@ $(document).ready(function () {
     fileSelector.on('change', newFileDetected);
     fileSelector.on('fileclear', cancelDetected);
 
-    setDebugMessage("Showing file selector pane");
     flipPanel("fileSelectorPane");
 
     handleMultiPartProcess();
-
-    setDebugMessage("ui.js initialization completed");
-    setDebugStatus("UI initialization completed");
 });

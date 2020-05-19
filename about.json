@@ -1,6 +1,6 @@
 {
-  "software-version": "0.4.0",
-  "build-codename": "making-progress",
-  "debug-mode": true,
+  "software-version": "0.4.8",
+  "build-codename": "cssuccess",
+  "debug-mode": false,
   "about-sign-off": "Caveat Emptor!"
 }
