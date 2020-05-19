@@ -373,9 +373,11 @@ function setExportProgress(exportProgress) {
     progressBar.css('width', exportProgress + '%');
 
     if (exportProgress === 0) {
+        $('.progress').removeClass('active');
         progressStatus.text("Exporting urls.");
         progressBarContainer.show();
         exportButton.prop('disabled', true);
+        $('.progress').addClass('active');
     }
 
     if (exportProgress === 100) {
@@ -387,6 +389,7 @@ function setExportProgress(exportProgress) {
 
 function cleanUpProgressBar() {
     $("#progressBarContainer").hide();
+    progressBar.css('width',  '1%');
 }
 
 
@@ -441,8 +444,6 @@ function outputTypeButton(action) {
     if (!saveCheckbox.is(':checked') && !copyCheckbox.is(':checked')) {
         exportButton.prop('disabled', true);
     }
-
-
         }
 
 

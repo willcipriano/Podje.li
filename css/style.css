@@ -125,28 +125,17 @@
     border-radius: 10px;
     position: relative;
 }
-.progress-bar::before {
-    content: attr(aria-valuenow);
-    top: -40px;
-    padding: 5px;
-    background-color: #686E85;
-    border: solid 2px #B4BAD2;
-    border-radius: 10px;
-    position: absolute;
-    width: 60px;
-    z-index: 1;
-    color: #B4BAD2;
-    margin-left: -30px;
-    text-align: center;
+
+@media only screen and (min-width: 760px) {
+
+    #fileSelectorContainer {
+        margin-top: -5%;
+    }
 }
-.progress-bar::after {
-    top: -14px;
-    height: 10px;
-    width: 14px;
-    background-color: #B4BAD2;
-    position: absolute;
-    content: " ";
-    z-index: 0;
-    transform: rotate(45deg);
-    margin-left: -8px;
+
+@media only screen and (min-width: 2100px) {
+    #fileSelectorContainer {
+        margin-top: -3%;
+    }
+
 }
