@@ -26,45 +26,45 @@
 
 <div class="container-fluid" id="outerContainer">
 
-<noscript>
-    <div class="container">
-        <div class="jumbotron">
-            <h1>JavaScript is required!</h1>
-            <p>podje.li can't work its storage magic without Javascript enabled, sorry.</p>
+    <noscript>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>JavaScript is required!</h1>
+                <p>podje.li can't work its storage magic without Javascript enabled, sorry.</p>
+            </div>
         </div>
-    </div>
-</noscript>
+    </noscript>
 
 
-<div class="container-fluid" id="logoContainer">
+    <div class="container-fluid" id="logoContainer">
         <img alt="PODJE.LI" src="logo.png" id="logo">
-</div>
+    </div>
 
-<div class="container" id="fileSelectorContainer">
+    <div class="container" id="fileSelectorContainer">
 
-    <div class="row" id="fileUpload">
+        <div class="row" id="fileUpload">
 
-        <div class="col-sm-8 mx-auto">
+            <div class="col-sm-8 mx-auto">
 
-            <form id="fileSelectorPane" onsubmit="loadFile(); return false;" style="display: none">
+                <form id="fileSelectorPane" onsubmit="loadFile(); return false;" style="display: none">
 
 
-                <input class="file form-control" data-show-preview="false" id="fileSelector" name="input-b2"
-                       type="file">
+                    <input class="file form-control" data-show-preview="false" id="fileSelector" name="input-b2"
+                           type="file">
 
-                <div class="text-center">
-                <button class="btn btn-light form-contol" type="button" value="about" id="aboutButton"
-                        onclick="showAboutModal()"
-                >About</button>
-                </div>
+                    <div class="text-center">
+                        <button class="btn btn-light form-contol" type="button" value="about" id="aboutButton"
+                                onclick="showAboutModal()"
+                        >About</button>
+                    </div>
 
-            </form>
+                </form>
+
+            </div>
 
         </div>
 
     </div>
-
-</div>
 
     <div class="exportMenu">
         <form id="exportPane">
@@ -74,17 +74,17 @@
             <h1 class="text-center lead">What format should the urls be exported to?</h1>
 
             <div class="text-center">
-            <label for="exportType"></label>
-                    <select id="exportType" name="exportTypes[]">
-                        <option value=".md">.md - markdown</option>
-                        <option value=".txt">.txt - plain text</option>
-                        <option value=".csv">.csv - comma separated values</option>
-                        <option value=".html">.html - hypertext markup language</option>
-                        <option value=".flat">.flat - fixed width</option>
-                    </select>
+                <label for="exportType"></label>
+                <select id="exportType" name="exportTypes[]">
+                    <option value=".md">.md - markdown</option>
+                    <option value=".txt">.txt - plain text</option>
+                    <option value=".csv">.csv - comma separated values</option>
+                    <option value=".html">.html - hypertext markup language</option>
+                    <option value=".flat">.flat - fixed width</option>
+                </select>
             </div>
 
-                <h1 class="text-center lead">How would you like those urls delivered?</h1>
+            <h1 class="text-center lead">How would you like those urls delivered?</h1>
 
             <div id="outputTypesContainer" class="container-fluid text-center">
 
@@ -97,7 +97,7 @@
             </label>
         </span>
 
-        <span class="btn-group" data-toggle="buttons">
+                <span class="btn-group" data-toggle="buttons">
             <label class="btn btn-outline-success copyUrlsToClipboardButton" id="outputTypesCopyButton">
                 <input type="checkbox" id="outputTypesCopy" onclick="outputTypeButton('copy')">Copy To Clipboard
             </label>
@@ -112,33 +112,51 @@
 
         <div id="progressBarContainer" class="container-fluid text-center">
 
-        <div class="progress" id="exportProgress">
-            <div class="progress-bar" role="progressbar" id="exportProgressBar"></div>
-        </div>
+            <div class="progress" id="exportProgress">
+                <div class="progress-bar" role="progressbar" id="exportProgressBar"></div>
+            </div>
             <h1 class="text-center lead" id="exportStatus"></h1>
         </div>
 
     </div>
 
-<div class="container">
+    <div class="container">
 
 
-    <div class="row" id="fileStatPanel" style="display: none">
-        <div class="col-xl-9 mx-auto">
-
+        <div class="row" id="fileStatPanel" style="display: none">
             <div class="col-xl-9 mx-auto">
 
-                <ul class="list-group" id="fileStats">
-                    <li class="list-group-item lead" id="fileStatSize"></li>
-                    <li class="list-group-item lead" id="fileStatType"></li>
-                    <li class="list-group-item lead" id="fileStatLastModified"></li>
-                </ul>
-                <br>
+                <div class="col-xl-9 mx-auto">
 
+                    <ul class="list-group" id="fileStats">
+                        <li class="list-group-item lead" id="fileStatSize"></li>
+                        <li class="list-group-item lead" id="fileStatType"></li>
+                        <li class="list-group-item lead" id="fileStatLastModified"></li>
+                    </ul>
+                    <br>
+
+                </div>
+
+
+                <div class="col-xl-9 mx-auto">
+
+                    <div class="col-xl-9 mx-auto">
+                    </div>
+                </div>
             </div>
+        </div>
 
-
+        <div class="row" id="fileUrlPanelSingle">
             <div class="col-xl-9 mx-auto">
+
+                <div class="col-xl-9 mx-auto">
+                    <br>
+                </div>
+
+                <div class="col-xl-9 mx-auto">
+
+
+                </div>
 
                 <div class="col-xl-9 mx-auto">
                 </div>
@@ -146,459 +164,350 @@
         </div>
     </div>
 
-    <div class="row" id="fileUrlPanelSingle">
-        <div class="col-xl-9 mx-auto">
+    <div aria-hidden="true" class="modal fade" id="singleFileUrlModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="singleFileUrlModalLabel">Share your file with this url</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
 
-            <div class="col-xl-9 mx-auto">
-                <br>
-            </div>
-
-            <div class="col-xl-9 mx-auto">
-
-
-            </div>
-
-            <div class="col-xl-9 mx-auto">
-            </div>
-        </div>
-    </div>
-</div>
-
-<div aria-hidden="true" class="modal fade" id="singleFileUrlModal" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="singleFileUrlModalLabel">Share your file with this url</h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <div class="input-group" id="singleFileInput">
-                    <input class="form-control" id="singleFileUrl" type="text">
-                    <span class="input-group-btn">
+                    <div class="input-group" id="singleFileInput">
+                        <input class="form-control" id="singleFileUrl" type="text">
+                        <span class="input-group-btn">
                             <button class="btn btn-sq btn-success" data-placement="button" data-toggle="tooltip"
                                     id="copyButton" title="Copy to Clipboard"
                                     type="button">Copy</button>
                     </span>
+                    </div>
+
+
                 </div>
-
-
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<div aria-hidden="true" class="modal fade" id="multiFileUrlModal" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="multiFileUrlModalLabel">Share your file with these urls</h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
+    <div aria-hidden="true" class="modal fade" id="multiFileUrlModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="multiFileUrlModalLabel">Share your file with these urls</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
 
 
-                <div class="input-group" id="multiFileInput1">
-                    <input autocapitalize="off" autocomplete="off" class="form-control" id="multiFileUrl1" spellcheck="false"
-                           type="text" tabindex="1">
-                    <span class="input-group-btn">
+                    <div class="input-group" id="multiFileInput1">
+                        <input autocapitalize="off" autocomplete="off" class="form-control" id="multiFileUrl1" spellcheck="false"
+                               type="text" tabindex="1">
+                        <span class="input-group-btn">
                             <button class="btn btn-sq btn-success copy-btn multiFile" data-placement="button"
                                     data-toggle="tooltip"
                                     id="copyButton1" onclick="copyFromMultiSelect(1)"
                                     title="Copy to Clipboard" type="button" tabindex="2"><img alt="Copy icon"
-                                                                                                    class="copy_icon"
-                                                                                                    src="icons/copy.png"></button>
+                                                                                              class="copy_icon"
+                                                                                              src="icons/copy.png"></button>
                     </span>
-                </div>
+                    </div>
 
-                <div class="input-group" id="multiFileInput2">
-                    <input autocapitalize="off" autocomplete="off" class="form-control" id="multiFileUrl2"
-                           spellcheck="false"
-                           type="text" tabindex="3">
-                    <span class="input-group-btn">
+                    <div class="input-group" id="multiFileInput2">
+                        <input autocapitalize="off" autocomplete="off" class="form-control" id="multiFileUrl2"
+                               spellcheck="false"
+                               type="text" tabindex="3">
+                        <span class="input-group-btn">
                             <button class="btn btn-sq btn-success copy-btn multiFile" data-placement="button"
                                     data-toggle="tooltip"
                                     id="copyButton2" onclick="copyFromMultiSelect(2)"
                                     title="Copy to Clipboard" type="button" tabindex="4"><img alt="Copy icon"
-                                                                                                    class="copy_icon"
-                                                                                                    src="icons/copy.png"></button>
+                                                                                              class="copy_icon"
+                                                                                              src="icons/copy.png"></button>
                     </span>
-                </div>
+                    </div>
 
-                <div class="input-group" id="multiFileInput3">
-                    <input autocapitalize="off" autocomplete="off" class="form-control multiFile" id="multiFileUrl3"
-                           spellcheck="false"
-                           type="text" tabindex="5">
-                    <span class="input-group-btn">
+                    <div class="input-group" id="multiFileInput3">
+                        <input autocapitalize="off" autocomplete="off" class="form-control multiFile" id="multiFileUrl3"
+                               spellcheck="false"
+                               type="text" tabindex="5">
+                        <span class="input-group-btn">
                             <button class="btn btn-sq btn-success copy-btn multiFile" data-placement="button"
                                     data-toggle="tooltip"
                                     id="copyButton3" onclick="copyFromMultiSelect(3)"
                                     title="Copy to Clipboard" type="button" tabindex="6"><img alt="Copy icon"
-                                                                                                    class="copy_icon"
-                                                                                                    src="icons/copy.png"></button>
+                                                                                              class="copy_icon"
+                                                                                              src="icons/copy.png"></button>
                     </span>
-                </div>
+                    </div>
 
-                <div class="input-group" id="multiFileInput4">
-                    <input autocapitalize="off" autocomplete="off" class="multiFile form-control" id="multiFileUrl4"
-                           spellcheck="false"
-                           type="text" tabindex="7">
-                    <span class="input-group-btn">
+                    <div class="input-group" id="multiFileInput4">
+                        <input autocapitalize="off" autocomplete="off" class="multiFile form-control" id="multiFileUrl4"
+                               spellcheck="false"
+                               type="text" tabindex="7">
+                        <span class="input-group-btn">
                             <button class="multiFile btn btn-sq btn-success copy-btn" data-placement="button"
                                     data-toggle="tooltip"
                                     id="copyButton4" onclick="copyFromMultiSelect(4)"
                                     title="Copy to Clipboard" type="button" tabindex="8"><img alt="Copy icon"
-                                                                                                    class="copy_icon"
-                                                                                                    src="icons/copy.png"></button>
+                                                                                              class="copy_icon"
+                                                                                              src="icons/copy.png"></button>
                     </span>
-                </div>
+                    </div>
 
-                <div class="input-group" id="multiFileInput5">
-                    <input autocapitalize="off" autocomplete="off" class="multiFile form-control" id="multiFileUrl5"
-                           spellcheck="false"
-                           type="text" tabindex="9">
-                    <span class="input-group-btn">
+                    <div class="input-group" id="multiFileInput5">
+                        <input autocapitalize="off" autocomplete="off" class="multiFile form-control" id="multiFileUrl5"
+                               spellcheck="false"
+                               type="text" tabindex="9">
+                        <span class="input-group-btn">
                             <button class="multiFile btn btn-sq btn-success copy-btn" data-placement="button"
                                     data-toggle="tooltip"
                                     id="copyButton5" onclick="copyFromMultiSelect(5)"
                                     title="Copy to Clipboard" type="button" tabindex="10"><img alt="Copy icon"
-                                                                                                    class="copy_icon"
-                                                                                                    src="icons/copy.png"></button>
+                                                                                               class="copy_icon"
+                                                                                               src="icons/copy.png"></button>
                     </span>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-file" type="button" onclick="showExportMenu()">Export</button>
+                    <button class="btn btn-secondary" type="button" id="multiFileUrlPrev" onclick="showMultiUrlPrevPage()">
+                        Previous</button>
+                    <button class="btn btn-secondary" type="button" id="multiFileUrlNext"
+                            onclick="showMultiUrlNextPage()">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div aria-hidden="true" class="modal fade" id="singleFileUrlDownloadModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="singleFileUrlDownloadModalLabel">Download your file</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <button class="btn btn-success" onclick="$loadSingleFileFromQueryParam()" type="button">Download File
+                    </button>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                    <button class="btn btn-primary" type="button">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div aria-hidden="true" class="modal fade" id="filePartDiscoveryModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="f">File fragment detected.</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+
+
+                    <img alt="file loading" class="img-fluid fileGif" id="fileFragmentGif" src="icons/filedownload.gif">
+
+
+                    <p id="filePartMessage"></p>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                    <button class="btn btn-primary" type="button">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div aria-hidden="true" class="modal fade" id="fileFoundModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">File assembly complete</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+
+
+                    <img alt="file completed" class="img-fluid fileGif" id="fileDoneGif" src="icons/filedownload.gif">
+
+
+                    <p id="fileCompleteMessage"></p>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                    <button class="btn btn-primary" onclick="assembleMultiPartFile()" type="button">Download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div aria-hidden="true" class="modal fade" id="aboutModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="aboutModalTitle"></h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <div id="aboutHeader" class="h1"></div>
+                    <hr>
+                    <div id="aboutSummary">Podje.li is a web based file sharing platform with a twist. In order to avoid the
+                        headache and cost of storing all those files (have you seen S3 outbound prices these days?), podje.li
+                        encodes a file into one or more URLS that you can share. This works great for small text files as they
+                        become one or two urls that can reasonably be shared, on the other hand larger files can be a
+                        problem...</div>
+                    <hr>
+                    <div id="aboutSignOff"></div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button" onclick="showDebugModal()"
+                            id="debugButton">
+                        Debug</button>
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div aria-hidden="true" class="modal fade" id="debugModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="debugModalTitle">Debug Monitor</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <b>Current Debug Status:</b><div id="debugStatus"></div>
+                    <hr>
+                    <b>Current Debug Message:</b><div id="debugMessage"></div>
+                    <hr>
+                    <b>Recent Messages (DESC):</b>
+                    <ul class="list-group" id="debugListGroup"></ul>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div aria-hidden="true" class="modal fade" id="fileResultModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body text-center">
+                    <div class="h2" id="fileResultHeader">Your file is now ready to be shared!</div>
+                    <div id="fileResultTotalUrls"></div>
+                    <i>How would you like them?</i>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" onclick="showExportMenu()">Save</button>
+                    <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div aria-hidden="true" class="modal fade" id="urlFileSaveModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="urlFileSaveModalTitle"></h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
 
+                <div id="urlFileSaveModalMessage"></div>
 
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-file" type="button" onclick="showExportMenu()">Export</button>
-                <button class="btn btn-secondary" type="button" id="multiFileUrlPrev" onclick="showMultiUrlPrevPage()">
-                    Previous</button>
-                <button class="btn btn-secondary" type="button" id="multiFileUrlNext"
-                        onclick="showMultiUrlNextPage()">Next</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div aria-hidden="true" class="modal fade" id="singleFileUrlDownloadModal" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="singleFileUrlDownloadModalLabel">Download your file</h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <button class="btn btn-success" onclick="$loadSingleFileFromQueryParam()" type="button">Download File
-                </button>
-
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                <button class="btn btn-primary" type="button">Save changes</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" onclick="downloadAsCsv()">Download as CSV</button>
+                    <button type="button" class="btn btn-info" onclick="outputURLS()">Copy as HTML</button>
+                    <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<div aria-hidden="true" class="modal fade" id="filePartDiscoveryModal" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="f">File fragment detected.</h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body text-center">
+    <div aria-hidden="true" class="modal fade" id="CSVOutputModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="CSVModalTitle"></h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Default checkbox
+                    </label>
+                </div>
 
-                <img alt="file loading" class="img-fluid fileGif" id="fileFragmentGif" src="icons/filedownload.gif">
-
-
-                <p id="filePartMessage"></p>
-
-
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                <button class="btn btn-primary" type="button">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div aria-hidden="true" class="modal fade" id="fileFoundModal" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">File assembly complete</h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body text-center">
-
-
-                <img alt="file completed" class="img-fluid fileGif" id="fileDoneGif" src="icons/filedownload.gif">
-
-
-                <p id="fileCompleteMessage"></p>
-
-
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                <button class="btn btn-primary" onclick="assembleMultiPartFile()" type="button">Download</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" onclick="downloadAsCsv()">Download as CSV</button>
+                    <button type="button" class="btn btn-info" onclick="copyAsHtml()">Copy as HTML</button>
+                    <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+        <div style="position: absolute; top: 0; right: 0;">
 
-<div aria-hidden="true" class="modal fade" id="aboutModal" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="aboutModalTitle"></h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body text-center">
-                <div id="aboutHeader" class="h1"></div>
-                <hr>
-                <div id="aboutSummary">Podje.li is a web based file sharing platform with a twist. In order to avoid the
-                    headache and cost of storing all those files (have you seen S3 outbound prices these days?), podje.li
-                    encodes a file into one or more URLS that you can share. This works great for small text files as they
-                    become one or two urls that can reasonably be shared, on the other hand larger files can be a
-                    problem...</div>
-                <hr>
-                <div id="aboutSignOff"></div>
-
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-dismiss="modal" type="button" onclick="showDebugModal()"
-                        id="debugButton">
-                    Debug</button>
-                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <img src="icons/help-icon.png" class="rounded mr-2" alt="...">
+                    <strong class="mr-auto">Clipboard Copy Successful</strong>
+                </div>
+                <div class="toast-body">
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-
-<div aria-hidden="true" class="modal fade" id="debugModal" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="debugModalTitle">Debug Monitor</h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body text-center">
-                <b>Current Debug Status:</b><div id="debugStatus"></div>
-                <hr>
-                <b>Current Debug Message:</b><div id="debugMessage"></div>
-                <hr>
-                <b>Recent Messages (DESC):</b>
-                <ul class="list-group" id="debugListGroup"></ul>
-
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div aria-hidden="true" class="modal fade" id="fileResultModal" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-
-            <div class="modal-body text-center">
-                <div class="h2" id="fileResultHeader">Your file is now ready to be shared!</div>
-                <div id="fileResultTotalUrls"></div>
-                <i>How would you like them?</i>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info" onclick="showUrlFileSaveModal()">Save</button>
-                <button type="button" class="btn btn-info" onclick="showExportMenu()">Save</button>
-                <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
-                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div aria-hidden="true" class="modal fade" id="urlFileSaveModal" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="urlFileSaveModalTitle"></h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div id="urlFileSaveModalMessage"></div>
-
-
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info" onclick="downloadAsCsv()">Download as CSV</button>
-                <button type="button" class="btn btn-info" onclick="outputURLS()">Copy as HTML</button>
-                <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
-                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div aria-hidden="true" class="modal fade" id="CSVOutputModal" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="CSVModalTitle"></h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    Default checkbox
-                </label>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info" onclick="downloadAsCsv()">Download as CSV</button>
-                <button type="button" class="btn btn-info" onclick="copyAsHtml()">Copy as HTML</button>
-                <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
-                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div aria-hidden="true" class="modal fade" id="urlFileSaveModal" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="urlFileSaveModalTitle"></h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div id="urlFileSaveModalMessage"></div>
-
-
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info" onclick="downloadAsCsv()">Download as CSV</button>
-                <button type="button" class="btn btn-info" onclick="outputURLS()">Copy as HTML</button>
-                <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
-                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div aria-hidden="true" class="modal fade" id="CSVOutputModal" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="CSVModalTitle"></h5>
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    Default checkbox
-                </label>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info" onclick="downloadAsCsv()">Download as CSV</button>
-                <button type="button" class="btn btn-info" onclick="copyAsHtml()">Copy as HTML</button>
-                <button type="button" class="btn btn-success" onclick="displayURLS()">Display</button>
-                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="exportMenu">
-<form id="exportPane">
-
-    <h2 class="text-center">Export URL's</h2>
-
-    <div class="exportHeader">
-    <div class="form-group text-center">
-        <label for="exportType">Export URL's as:</label>
-        <br>
-        <select class="selectpicker" id="exportType">
-            <option>CSV</option>
-            <option>HTML</option>
-        </select>
-    </div>
-
-    <div class="form-group text-center">
-        <label for="exportMethod">To my:</label>
-        <br>
-        <select class="selectpicker" id="exportMethod">
-            <option>Clipboard</option>
-            <option>File System</option>
-        </select>
-    </div>
-    </div>
-
-    <div class="ExportBody"></div>
-
-
-    <div class="ExportFooter"></div>
-
-
-</form>
-</div>
-
-
-<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
-    <div style="position: absolute; top: 0; right: 0;">
-
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <img src="icons/help-icon.png" class="rounded mr-2" alt="...">
-                <strong class="mr-auto">Clipboard Copy Successful</strong>
-            </div>
-            <div class="toast-body">
-            </div>
-        </div>
-    </div>
-</div>
 
 </div>
 
