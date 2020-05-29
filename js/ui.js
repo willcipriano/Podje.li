@@ -247,6 +247,20 @@ function toast(toastBody) {
     $('.toast').toast('show');
 }
 
+function copyFromSingleSelect() {
+    navigator.clipboard.writeText($("#singleFileUrl").val())
+        .then(() => {
+                toast("URL copied to your clipboard successfully.");
+            })
+        .catch(err => {
+                toast("URL #" + number + " copied to your clipboard unsuccessfully.");
+
+                if (getVersionData().debugMode()) {
+                    console.log('clipboard copy error: ' + err); }
+
+            });
+}
+
 function copyFromMultiSelect(number) {
     let multiFileUrl = $("#multiFileUrl" + number);
 
