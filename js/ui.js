@@ -18,6 +18,7 @@ function populateFileDetails(file) {
     fileStatSize.text("Size: " + file.size + " bytes");
     fileStatType.text("Type: " + FILEMIME);
     fileStatLastModified.text("Last Modified: " + (lastModified.getMonth() + 1) + "/" + lastModified.getFullYear());
+    $("#aboutButton").hide();
     flipPanel("fileDetails");
 
 }
@@ -199,6 +200,7 @@ function newFileDetected() {
 
 function cancelDetected() {
     flipPanel('fileDetails', false);
+    $("#aboutButton").show();
 }
 
 
@@ -302,7 +304,6 @@ function showDebugModal() {
 }
 
 function userFileProcessCompleted(urls) {
-    setDebugStatus("File process UI startup");
     clearMultiUrlPage();
     showFileResultModal();
 }
@@ -323,6 +324,10 @@ function showExportMenu() {
     $(".exportMenu").show();
     $('#fileResultModal').modal('hide');
     multiFileUrlModal.modal('hide');
+}
+
+function hideExportMenu() {
+    $(".exportMenu").hide();
 }
 
 function startSingleExport(exportType, fileExt, options, outputType, compressed = false) {
@@ -373,11 +378,9 @@ function setExportProgress(exportProgress) {
     progressBar.css('width', exportProgress + '%');
 
     if (exportProgress === 0) {
-        $('.progress').removeClass('active');
         progressStatus.text("Exporting urls.");
-        progressBarContainer.show();
         exportButton.prop('disabled', true);
-        $('.progress').addClass('active');
+        progressBarContainer.show();
     }
 
     if (exportProgress === 100) {
@@ -389,7 +392,7 @@ function setExportProgress(exportProgress) {
 
 function cleanUpProgressBar() {
     $("#progressBarContainer").hide();
-    progressBar.css('width',  '1%');
+    $("#exportProgressBar").css('width', "1%");
 }
 
 
@@ -408,6 +411,10 @@ function exportResultsButton() {
         setExportProgress(1);
         startSingleExport(exportTypes[0].id, exportTypes[0].id, [], outputType, compressionEnabled)
     }
+
+    hideExportMenu();
+    $('#fileSelector').fileinput('clear');
+    flipPanel("fileSelectorPane");
 }
 
 function outputTypeButton(action) {
