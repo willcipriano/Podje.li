@@ -10,7 +10,8 @@
 
     <title>podje.li</title>
 
-    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+    <link crossorigin="anonymous"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
           rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.1/css/fileinput.min.css" media="all"
           rel="stylesheet" type="text/css"/>
@@ -53,9 +54,10 @@
                            type="file">
 
                     <div class="text-center">
-                        <button class="btn btn-light form-contol" type="button" value="about" id="aboutButton"
+                        <button class="btn btn-light" type="button" value="about" id="aboutButton"
                                 onclick="showAboutModal()"
-                        >About</button>
+                        >About
+                        </button>
                     </div>
 
                 </form>
@@ -92,8 +94,8 @@
             <label class="btn btn-outline-success" id="outputTypesSaveButton">
                 <input type="checkbox" id="outputTypesSave" onclick="outputTypeButton('save')">Download
             </label>
-            <label class="btn btn-outline-success"  id="outputTypesCompressButton">
-                <input type="checkbox"  id="outputTypesCompress" onclick="outputTypeButton('compress')">Compress
+            <label class="btn btn-outline-success" id="outputTypesCompressButton">
+                <input type="checkbox" id="outputTypesCompress" onclick="outputTypeButton('compress')">Compress
             </label>
         </span>
 
@@ -105,7 +107,8 @@
                 <div class="ExportBody text-center">
                     <button class="btn btn-success outputButton" data-dismiss="modal" type="button"
                             id="exportAndButton" disabled onclick="exportResultsButton()">Export
-                        & Download</button>
+                        & Download
+                    </button>
                 </div>
             </div>
         </form>
@@ -180,7 +183,9 @@
                         <span class="input-group-btn">
                             <button class="btn btn-sq btn-success" data-placement="button" data-toggle="tooltip"
                                     id="copyButton" title="Copy to Clipboard"
-                                    type="button">Copy</button>
+                                    type="button" onclick="copyFromSingleSelect()"><img alt="Copy icon"
+                                                                                        class="copy_icon"
+                                                                                        src="icons/copy.png"></button>
                     </span>
                     </div>
 
@@ -207,7 +212,8 @@
 
 
                     <div class="input-group" id="multiFileInput1">
-                        <input autocapitalize="off" autocomplete="off" class="form-control" id="multiFileUrl1" spellcheck="false"
+                        <input autocapitalize="off" autocomplete="off" class="form-control" id="multiFileUrl1"
+                               spellcheck="false"
                                type="text" tabindex="1">
                         <span class="input-group-btn">
                             <button class="btn btn-sq btn-success copy-btn multiFile" data-placement="button"
@@ -279,10 +285,13 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-file" type="button" onclick="showExportMenu()">Export</button>
-                    <button class="btn btn-secondary" type="button" id="multiFileUrlPrev" onclick="showMultiUrlPrevPage()">
-                        Previous</button>
+                    <button class="btn btn-secondary" type="button" id="multiFileUrlPrev"
+                            onclick="showMultiUrlPrevPage()">
+                        Previous
+                    </button>
                     <button class="btn btn-secondary" type="button" id="multiFileUrlNext"
-                            onclick="showMultiUrlNextPage()">Next</button>
+                            onclick="showMultiUrlNextPage()">Next
+                    </button>
                 </div>
             </div>
         </div>
@@ -300,13 +309,13 @@
                 </div>
                 <div class="modal-body">
 
-                    <button class="btn btn-success" onclick="$loadSingleFileFromQueryParam()" type="button">Download File
+                    <button class="btn btn-success" onclick="$loadSingleFileFromQueryParam()" type="button">Download
+                        File
                     </button>
 
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                    <button class="btn btn-primary" type="button">Save changes</button>
                 </div>
             </div>
         </div>
@@ -345,20 +354,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">File assembly complete</h5>
+                    <h5 class="modal-title">Your file is now ready for download</h5>
                     <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body text-center">
-
-
                     <img alt="file completed" class="img-fluid fileGif" id="fileDoneGif" src="icons/filedownload.gif">
-
-
                     <p id="fileCompleteMessage"></p>
-
-
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
@@ -381,11 +384,15 @@
                 <div class="modal-body text-center">
                     <div id="aboutHeader" class="h1"></div>
                     <hr>
-                    <div id="aboutSummary">Podje.li is a web based file sharing platform with a twist. In order to avoid the
-                        headache and cost of storing all those files (have you seen S3 outbound prices these days?), podje.li
-                        encodes a file into one or more URLS that you can share. This works great for small text files as they
+                    <div id="aboutSummary">Podje.li is a web based file sharing platform with a twist. In order to avoid
+                        the
+                        headache and cost of storing all those files (have you seen S3 outbound prices these days?),
+                        podje.li
+                        encodes a file into one or more URLS that you can share. This works great for small text files
+                        as they
                         become one or two urls that can reasonably be shared, on the other hand larger files can be a
-                        problem...</div>
+                        problem...
+                    </div>
                     <hr>
                     <div id="aboutSignOff"></div>
 
@@ -393,7 +400,8 @@
                 <div class="modal-footer">
                     <button class="btn btn-secondary" data-dismiss="modal" type="button" onclick="showDebugModal()"
                             id="debugButton">
-                        Debug</button>
+                        Debug
+                    </button>
                     <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
                 </div>
             </div>
@@ -411,9 +419,11 @@
                     </button>
                 </div>
                 <div class="modal-body text-center">
-                    <b>Current Debug Status:</b><div id="debugStatus"></div>
+                    <b>Current Debug Status:</b>
+                    <div id="debugStatus"></div>
                     <hr>
-                    <b>Current Debug Message:</b><div id="debugMessage"></div>
+                    <b>Current Debug Message:</b>
+                    <div id="debugMessage"></div>
                     <hr>
                     <b>Recent Messages (DESC):</b>
                     <ul class="list-group" id="debugListGroup"></ul>

@@ -16,7 +16,6 @@ function getQueryParam(name) {
 }
 
 function loadFile() {
-    setDebugStatus("loading file");
     FILEREADER.readAsDataURL(FILESELECTOR[0].files[0]);
     FILEREADER.onloadend = processFileString;
 }
@@ -26,8 +25,6 @@ function getFileName() {
 }
 
 function processFileString() {
-    setDebugStatus("Processing file");
-
     FILEMIME = FILEREADER.result.split(",", 1)[0];
 
     FILENAME = FILESELECTOR[0].files[0].name;
@@ -84,8 +81,6 @@ function processFileString() {
 
 
 function multipartFileProcessRegister() {
-    setDebugStatus("Processing MultiPart File");
-
     const filename = decodeURIComponent(getQueryParam("n"));
     const mime = decodeURIComponent(getQueryParam("m"));
     const totalParts = parseInt(getQueryParam("pt"));
@@ -146,7 +141,6 @@ function appendZeros(partNo) {
 
 
 function assembleMultiPartFile() {
-    setDebugStatus("Starting to assemble multipart file");
     let fileEncoded = "";
     const totalParts = localStorage.getItem("total_parts");
 
@@ -163,7 +157,6 @@ function assembleMultiPartFile() {
 
 
 function loadSingleFileFromQueryParam() {
-    setDebugStatus("loading single file from query param");
     const fileBlob = Base64String.decompressFromUTF16(decodeURIComponent(getQueryParam("pl")));
     const fileBase64 = decodeURIComponent(getQueryParam("m")) + "," + fileBlob;
     saveAs(dataUrlToBlob(fileBase64), getQueryParam("n"));
@@ -171,7 +164,6 @@ function loadSingleFileFromQueryParam() {
 
 
 function dataUrlToBlob(dataUrl) {
-    setDebugStatus("Converting dataurl to blob");
     let array = dataUrl.split(",");
     let mimeType = array[0].match(/:(.*?);/)[1];
     let base64 = atob(array[1]);
