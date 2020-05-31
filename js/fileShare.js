@@ -5,6 +5,7 @@ const MAXCHARS = 2000;
 let FILESTRING;
 let FILENAME;
 let FILEMIME;
+let FILEHASH;
 let URLS = [];
 
 
@@ -29,10 +30,11 @@ function processFileString() {
 
     FILENAME = FILESELECTOR[0].files[0].name;
     FILESTRING = encodeURIComponent(Base64String.compressToUTF16(FILEREADER.result.split(",", 2)[1]));
+    FILEHASH = CryptoJS.MD5(FILESTRING).toString();
 
     let baseUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
     let basicUrl = baseUrl + "?m=" + encodeURIComponent(FILEMIME) + "&n=" + encodeURIComponent(FILENAME) + "&pl=";
-    let multiPartStartBaseUrl = baseUrl + "?m=" + encodeURIComponent(FILEMIME) + "&n=" + encodeURIComponent(FILENAME) + "&pt=0000";
+    let multiPartStartBaseUrl = baseUrl + "?m=" + encodeURIComponent(FILEMIME) + "&h=" + encodeURIComponent(FILEHASH) + "&n=" + encodeURIComponent(FILENAME) + "&pt=0000";
     let multiPartUrl = baseUrl + "&p=0000";
 
 
@@ -84,11 +86,13 @@ function multipartFileProcessRegister() {
     const filename = decodeURIComponent(getQueryParam("n"));
     const mime = decodeURIComponent(getQueryParam("m"));
     const totalParts = parseInt(getQueryParam("pt"));
+    const filehash = decodeURIComponent(getQueryParam('h'));
 
     localStorage.setItem("filename", filename);
     localStorage.setItem("mime", mime);
     localStorage.setItem("total_parts", totalParts);
     localStorage.setItem("file_part_0001", getQueryParam("mp"));
+    localStorage.setItem("filehash", filehash)
 }
 
 function multipartFileProcessAdd() {
@@ -143,10 +147,17 @@ function appendZeros(partNo) {
 function assembleMultiPartFile() {
     let fileEncoded = "";
     const totalParts = localStorage.getItem("total_parts");
+    const fileHash = decodeURIComponent(localStorage.getItem("filehash"));
 
     let i;
     for (i = 1; i <= totalParts; i++) {
         fileEncoded += localStorage.getItem("file_part_" + appendZeros(i));
+    }
+
+    const assembledHash = CryptoJS.MD5(fileEncoded);
+
+    if (assembledHash !== fileHash) {
+        console.log("match not found!");
     }
 
     let fileBlob = Base64String.decompressFromUTF16(decodeURIComponent(fileEncoded));
