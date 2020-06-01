@@ -309,7 +309,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <button class="btn btn-success" onclick="$loadSingleFileFromQueryParam()" type="button">Download
+                    <button class="btn btn-success" onclick="loadSingleFileFromQueryParam()" type="button">Download
                         File
                     </button>
 
@@ -342,8 +342,27 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                    <button class="btn btn-primary" type="button">Save changes</button>
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button" onclick="closeWindow()">Close Window</button>
+                    <button class="btn btn-warning" type="button" onclick="resetFileReconstruction()">Cancel file reconstruction</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div aria-hidden="true" class="modal fade" id="filePartFailureModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="g">File fragment failure.</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    File fragment failed to load. Are you sure this was copied correctly? Did you start with the first URL in the set first?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" data-dismiss="modal" type="button">Close</button>
                 </div>
             </div>
         </div>
@@ -364,8 +383,8 @@
                     <p id="fileCompleteMessage"></p>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                    <button class="btn btn-primary" onclick="assembleMultiPartFile()" type="button">Download</button>
+                    <button class="btn btn-warning" type="button" onclick="closeWindow()">Close Window</button>
+                    <button class="btn btn-primary" onclick="downloadMultiPartFile()" type="button">Download</button>
                 </div>
             </div>
         </div>
@@ -409,6 +428,7 @@
     </div>
 
 
+
     <div aria-hidden="true" class="modal fade" id="debugModal" role="dialog" tabindex="-1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -420,6 +440,7 @@
                 </div>
                 <div class="modal-body text-center">
                     <b>Current Debug Status:</b>
+
                     <div id="debugStatus"></div>
                     <hr>
                     <b>Current Debug Message:</b>
@@ -476,7 +497,6 @@
             </div>
         </div>
     </div>
-
 
     <div aria-hidden="true" class="modal fade" id="CSVOutputModal" role="dialog" tabindex="-1">
         <div class="modal-dialog" role="document">

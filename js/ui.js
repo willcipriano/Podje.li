@@ -216,7 +216,11 @@ function handleMultiPartProcess() {
             $('#filePartDiscoveryModal').modal('show');
         }
     } else if (getQueryParam('mp')) {
-        multipartFileProcessAdd();
+
+        if (!multipartFileProcessAdd()) {
+            $('#filePartFailureModal').modal('show');
+            throw "Failed to load file fragment";
+        }
 
         if (!detectTotalPartsCompleted()) {
             $('#filePartMessage').text(localStorage.getItem('filename') + ' part ' + getQueryParam('p'));
@@ -225,6 +229,21 @@ function handleMultiPartProcess() {
 
     }
 
+}
+
+function downloadMultiPartFile() {
+    $("#fileFoundModal").modal('hide');
+    assembleMultiPartFile();
+}
+
+function resetFileReconstruction() {
+    multipartFileClear();
+    $("#filePartDiscoveryModal").modal("hide");
+}
+
+function closeWindow() {
+    window.open('','_parent','');
+    window.close();
 }
 
 function displayURLS() {

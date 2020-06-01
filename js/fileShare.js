@@ -68,7 +68,7 @@ function processFileString() {
             let partNo = appendZeros(part);
 
             let prevPos = fileStringPos;
-            let url = window.location.protocol + "//" + window.location.host + window.location.pathname + "?p=" + partNo + "&mp=";
+            let url = window.location.protocol + "//" + window.location.host + window.location.pathname + "?p=" + partNo + "&k=" + FILEHASH.substring(0,4) + "&mp=";
             fileStringPos = fileStringPos + (MAXCHARS - url.length);
 
             url = url + FILESTRING.substring(prevPos, fileStringPos);
@@ -93,10 +93,44 @@ function multipartFileProcessRegister() {
     localStorage.setItem("total_parts", totalParts);
     localStorage.setItem("file_part_0001", getQueryParam("mp"));
     localStorage.setItem("filehash", filehash)
+    localStorage.setItem("fileKey", filehash.substring(0,4))
+}
+
+function remLSPref(pref, newName) {
+    for (var key in localStorage) {
+        if (key.indexOf(pref) == 0) {
+            if (key != newName) {
+                localStorage.removeItem(key);
+            }
+        }
+    }
+}
+
+function multipartFileClear() {
+    let arr = [];
+    for (let i = 0; i < localStorage.length; i++){
+        if (localStorage.key(i).substring(0,9) == 'file_part') {
+            arr.push(localStorage.key(i));
+        }
+    }
+    for (let i = 0; i < arr.length; i++) {
+        localStorage.removeItem(arr[i]);
+    }
+
+    localStorage.removeItem("filename");
+    localStorage.removeItem("mime");
+    localStorage.removeItem("total_parts");
+    localStorage.removeItem("filehash");
+    localStorage.removeItem("fileKey");
 }
 
 function multipartFileProcessAdd() {
+    if (localStorage.getItem('fileKey') === getQueryParam("k")) {
     localStorage.setItem("file_part_" + getQueryParam("p"), getQueryParam("mp"));
+    return true;
+    } else {
+        return false;
+    }
 }
 
 function detectTotalPartsCompleted() {
@@ -120,8 +154,11 @@ function detectTotalPartsCompleted() {
         return true;
 
     } else {
-
-        $("#filePartMessage").text(partsFound.length + " parts found!");
+        if (partsFound.length == 1) {
+            $("#filePartMessage").text("First part found!");
+        }
+        else {
+        $("#filePartMessage").text(partsFound.length + " parts found!"); }
     }
 
 
@@ -154,16 +191,17 @@ function assembleMultiPartFile() {
         fileEncoded += localStorage.getItem("file_part_" + appendZeros(i));
     }
 
-    const assembledHash = CryptoJS.MD5(fileEncoded);
+    const assembledHash = CryptoJS.MD5(fileEncoded).toString();
 
     if (assembledHash !== fileHash) {
-        console.log("match not found!");
+        throw "Unable to verify file contents, aborting..."
     }
 
     let fileBlob = Base64String.decompressFromUTF16(decodeURIComponent(fileEncoded));
     fileBlob = decodeURIComponent(localStorage.getItem("mime")) + "," + fileBlob;
 
     saveAs(dataUrlToBlob(fileBlob), localStorage.getItem("filename"));
+    multipartFileClear();
 }
 
 
