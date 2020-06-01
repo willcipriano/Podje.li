@@ -17,6 +17,7 @@ function getQueryParam(name) {
 }
 
 function loadFile() {
+    multipartFileClear();
     FILEREADER.readAsDataURL(FILESELECTOR[0].files[0]);
     FILEREADER.onloadend = processFileString;
 }
@@ -29,13 +30,14 @@ function processFileString() {
     FILEMIME = FILEREADER.result.split(",", 1)[0];
 
     FILENAME = FILESELECTOR[0].files[0].name;
-    FILESTRING = encodeURIComponent(Base64String.compressToUTF16(FILEREADER.result.split(",", 2)[1]));
+    FILESTRING = encodeURIComponent(Base64String.compressToUTF16(FILEREADER.result.split(",", 2)[1])).replace(/'/g, "%27");
+    console.log(FILESTRING);
     FILEHASH = CryptoJS.MD5(FILESTRING).toString();
 
     let baseUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
     let basicUrl = baseUrl + "?m=" + encodeURIComponent(FILEMIME) + "&n=" + encodeURIComponent(FILENAME) + "&pl=";
     let multiPartStartBaseUrl = baseUrl + "?m=" + encodeURIComponent(FILEMIME) + "&h=" + encodeURIComponent(FILEHASH) + "&n=" + encodeURIComponent(FILENAME) + "&pt=0000";
-    let multiPartUrl = baseUrl + "&p=0000";
+    let multiPartUrl = baseUrl + "&p=0000&k=" + encodeURIComponent(FILEHASH);
 
 
     let basicUrlMode = false;
@@ -96,16 +98,6 @@ function multipartFileProcessRegister() {
     localStorage.setItem("fileKey", filehash.substring(0,4))
 }
 
-function remLSPref(pref, newName) {
-    for (var key in localStorage) {
-        if (key.indexOf(pref) == 0) {
-            if (key != newName) {
-                localStorage.removeItem(key);
-            }
-        }
-    }
-}
-
 function multipartFileClear() {
     let arr = [];
     for (let i = 0; i < localStorage.length; i++){
@@ -160,14 +152,10 @@ function detectTotalPartsCompleted() {
         else {
         $("#filePartMessage").text(partsFound.length + " parts found!"); }
     }
-
-
     if (partsFound.length < localStorage.getItem("total_parts")) {
         setTimeout(detectTotalPartsCompleted, 2000);
         return false;
     }
-
-
 }
 
 function appendZeros(partNo) {
@@ -194,7 +182,10 @@ function assembleMultiPartFile() {
     const assembledHash = CryptoJS.MD5(fileEncoded).toString();
 
     if (assembledHash !== fileHash) {
-        throw "Unable to verify file contents, aborting..."
+        console.log("Assembled Hash: " + assembledHash);
+        console.log("File Hash: " + fileHash);
+        console.log(fileEncoded);
+        throw "Unable to verify file contents, aborting...";
     }
 
     let fileBlob = Base64String.decompressFromUTF16(decodeURIComponent(fileEncoded));
