@@ -31,7 +31,6 @@ function processFileString() {
 
     FILENAME = FILESELECTOR[0].files[0].name;
     FILESTRING = encodeURIComponent(Base64String.compressToUTF16(FILEREADER.result.split(",", 2)[1])).replace(/'/g, "%27");
-    console.log(FILESTRING);
     FILEHASH = CryptoJS.MD5(FILESTRING).toString();
 
     let baseUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
@@ -184,7 +183,6 @@ function assembleMultiPartFile() {
     if (assembledHash !== fileHash) {
         console.log("Assembled Hash: " + assembledHash);
         console.log("File Hash: " + fileHash);
-        console.log(fileEncoded);
         throw "Unable to verify file contents, aborting...";
     }
 

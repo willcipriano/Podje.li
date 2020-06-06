@@ -37,7 +37,7 @@ function basicHTMLEncoder(encodeReq) {
     let x;
 
     for (x = 0; x < encodeReq.urls.length; x++) {
-        html += "<p><a href='" + encodeReq.urls[x] + "'>Part " + (x + 1) + "</a></p>\n";
+        html += "<p><a href='" + encodeReq.urls[x] + "' target='_blank'>Part " + (x + 1) + "</a></p>\n";
     }
     return html.slice(0, -1);
 }
