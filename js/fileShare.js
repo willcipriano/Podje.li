@@ -30,7 +30,7 @@ function processFileString() {
     FILEMIME = FILEREADER.result.split(",", 1)[0];
 
     FILENAME = FILESELECTOR[0].files[0].name;
-    FILESTRING = encodeURIComponent(Base64String.compressToUTF16(FILEREADER.result.split(",", 2)[1])).replace(/'/g, "%27");
+    FILESTRING = cleanEncodeURI(Base64String.compressToUTF16(FILEREADER.result.split(",", 2)[1]));
     FILEHASH = CryptoJS.MD5(FILESTRING).toString();
 
     let baseUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
@@ -82,6 +82,21 @@ function processFileString() {
     }
 }
 
+function cleanEncodeURI(base64Text) {
+    let encodedStr = '', encodeChars = ["~", "!", "*", "(", ")", "'"];
+    base64Text = encodeURIComponent(base64Text);
+
+    for(let i = 0, len = base64Text.length; i < len; i++) {
+        if (encodeChars.indexOf(base64Text[i]) >= 0) {
+            let hex = parseInt(base64Text.charCodeAt(i)).toString(16);
+            encodedStr += '%' + hex;
+        }
+        else {
+            encodedStr += base64Text[i];
+        }
+    }
+    return encodedStr;
+}
 
 function multipartFileProcessRegister() {
     const filename = decodeURIComponent(getQueryParam("n"));

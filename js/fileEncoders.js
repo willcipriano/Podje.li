@@ -57,7 +57,6 @@ function basicCSVEncoder(encodeReq) {
     let csv = "";
     let x;
     const quoteUrl = encodeReq.options.includes('csvQuoteURL');
-    const excelStyleUrl = encodeReq.options.includes('csvExcelURL');
 
 
     if (encodeReq.options.includes('csvLineNumbers')) {
