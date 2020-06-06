@@ -6,4 +6,6 @@ _podjeli [Croatian] - the action of separating something into parts or the proce
 
 Podjeli is a file sharing platform that lets you keep hold of your files while you share them. Unlike legacy file sharing platforms that store your files for you on their servers, Podjeli makes it convenient to store your files anywhere you can store a URL, spreadsheet or even markdown.
 
-[Check it out here.](https://podje.li "Podje.li - share small files")
+[Start using Podje.li](https://podje.li "Podje.li - share small files")
+
+[Podje.li how to](https://github.com/WilliamFCipriano/Podje.li/wiki/How-To)
