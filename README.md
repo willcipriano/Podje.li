@@ -1,4 +1,4 @@
-# About Podje.li
+![Podje.li Logo](https://podje.li/logo.png)
 
 ***
 _podjeli [Croatian] - the action of separating something into parts or the process of being separated._
