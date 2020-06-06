@@ -257,7 +257,7 @@ function showFileResultModal() {
     const modal = $('#fileResultModal');
     const fileResultTotalUrls = $('#fileResultTotalUrls');
 
-    fileResultTotalUrls.text("We can squeeze that into roughly " + getShareUrlsLength() + " URL's.");
+    fileResultTotalUrls.text("We can squeeze that into roughly " + getShareUrlsLength() + " URLs.");
     modal.modal('show');
 }
 
@@ -343,7 +343,7 @@ function userFileProcessCompleted(urls) {
 
 
 function showUrlFileSaveModal() {
-    $('#urlFileSaveModalMessage').html("You have <i>" + getShareUrlsLength() + "</i> URL's to store, how should I format them?");
+    $('#urlFileSaveModalMessage').html("You have <i>" + getShareUrlsLength() + "</i> URLs to store, how should I format them?");
     $("#fileResultModal").modal('hide');
     $("#urlFileSaveModal").modal('show');
 }
